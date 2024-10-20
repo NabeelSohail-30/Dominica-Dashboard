@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    font-family: "Inter";
+}
+
+.app {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    padding: 20px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    justify-content: flex-start;
+    gap: 32px;
+    margin-left: 20%;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    background: #f9f9f9;
+    border-right: 1px solid #e4e4e4;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+    position: fixed;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.sidebar.sidebar-collapsed {
+    width: 60px; /* Minimum width to keep the toggle button visible */
+}
+
+.sidebar-main,
+.sidebar-footer,
+.sidebar-title .left {
+    display: block;
+}
+
+.sidebar.sidebar-collapsed .sidebar-main,
+.sidebar.sidebar-collapsed .sidebar-footer,
+.sidebar.sidebar-collapsed .sidebar-title .left {
+    display: none; /* Hide the content when collapsed */
+}
+
+.sidebar.sidebar-collapsed .sidebar-title .right {
+    margin-left: 0; /* Keep the toggle button aligned */
+}
+
+.sidebar .sidebar-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 16px 20px 17px;
+    gap: 10px;
+    width: 295px;
+    height: 72px;
+}
+
+.sidebar-title .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sidebar-title .left .title {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+}
+
+.sidebar-title .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar .sidebar-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 16px 23px;
+    gap: 10px;
+    margin: 0 auto;
+    width: 295px;
+    height: 103px;
+}
+
+.sidebar-footer .profile-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    gap: 10px;
+    margin: 0 auto;
+    width: 263px;
+    height: 65px;
+    border: 1px solid #e4e4e4;
+    border-radius: 12px;
+}
+
+.sidebar-footer .profile-card .profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-footer .profile-card .profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sidebar-footer .profile-card .profile-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-footer .profile-card .profile-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.sidebar-footer .profile-card .profile-email {
+    font-weight: 400;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.sidebar-footer .profile-card .dropdown-icon {
+    cursor: pointer;
+    margin-left: 21px;
+}
+
+.sidebar-main .sidebar-main-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    width: 295px;
+    height: 415px;
+}
+
+.sidebar-main .sidebar-main-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    width: 295px;
+    height: 80px;
+}
+
+.sidebar .sidebar-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+    width: 295px;
+    height: 775px;
+    margin: auto;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px 16px;
+    gap: 10px;
+    width: 295px;
+    height: 40px;
+}
+
+.search-bar input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 10px;
+    width: 263px;
+    height: 40px;
+    background: #f2f2f2;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.search-bar .search-btn {
+    position: absolute;
+    padding: 2px 4px;
+    gap: 8px;
+    width: 28px;
+    height: 20px;
+    background: #f9fafb;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer; /* Adds a pointer cursor for better UX */
+}
+
+.sidebar-main .menu-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 16px;
+    gap: 4px;
+}
+
+.sidebar-main .menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding: 8px;
+    gap: 12px;
+    width: 263px;
+    height: 40px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #414651;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar-main .menu-item a {
+    text-decoration: none;
+    color: #414651;
+}
+
+.sidebar-main .menu-item.active {
+    padding: 8px;
+    gap: 12px;
+    width: 263px;
+    height: 40px;
+    background: #eeeeee;
+    border-radius: 12px;
+}
+
+.sidebar-main .menu-item:hover {
+    background: #eeeeee;
+}
+
+.sidebar-main .has-submenu .submenu-icon {
+    margin-left: auto;
+    font-size: 14px;
+    color: #888;
+}
