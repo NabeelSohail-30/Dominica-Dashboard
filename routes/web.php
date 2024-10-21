@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AboutUsController;
 
 Auth::routes();
 
@@ -23,3 +24,7 @@ Route::get('/menus/search', [MenuController::class, 'search'])->name('menu.searc
 // Add this route for editing a menu item
 Route::get('/admin/edit_menu/{id}', [MenuController::class, 'edit'])->name('menu.edit')->middleware('auth');
 Route::post('/admin/edit_menu/{id}', [MenuController::class, 'update'])->name('menu.update')->middleware('auth');
+
+
+Route::get('/about-us/edit', [AboutUsController::class, 'edit'])->name('about_us.edit')->middleware('auth');
+Route::put('/about-us/update', [AboutUsController::class, 'update'])->name('about_us.update')->middleware('auth');
