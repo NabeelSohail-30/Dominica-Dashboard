@@ -9,9 +9,8 @@
 
         <div class="form-header">
             <div class="bread-crumb">
-                <span><img src="{{ asset('images/home-icon.svg') }}" alt="Home"></span>
-                <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Dashboard</span>
+                <span><a onclick="window.location='{{ route('dashboard') }}';" style="cursor: pointer"><img
+                            src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
                 <span>About Us</span>
             </div>
