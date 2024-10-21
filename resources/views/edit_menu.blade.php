@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Edit Menu')
+
 @section('content')
     <form action="{{ route('menu.update', base64_encode($menu->id)) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -38,7 +40,10 @@
 
                 <!-- Image Upload -->
                 <div class="form-group">
-                    <label for="image">Image *</label>
+                    <div class="form-text">
+                        <label for="image">Image *</label>
+                        <span>Upload an image</span>
+                    </div>
                     <div class="form-control">
                         <div class="upload-box" onclick="document.getElementById('image').click()">
                             <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
@@ -60,7 +65,10 @@
 
                 <!-- Background Image Upload -->
                 <div class="form-group">
-                    <label for="bg_image">Background Image *</label>
+                    <div class="form-text">
+                        <label for="bg_image">Background Image *</label>
+                        <span>Upload a background image</span>
+                    </div>
                     <div class="form-control">
                         <div class="upload-box" onclick="document.getElementById('bg_image').click()">
                             <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>

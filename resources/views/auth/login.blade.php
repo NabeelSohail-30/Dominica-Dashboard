@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
-@section('custom_css')
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
+    <div class="header">
+        <img src="{{ asset('images/app-icon.svg') }}" alt="Logo" class="logo">
+        <div class="app-name">Explore Dominica</div>
+    </div>
+
     <div class="login-container">
         <div class="login-card">
-            <div class="login-header">{{ __('Login') }}</div>
+            <div class="login-header">
+                <img src="{{ asset('images/app-icon.svg') }}" alt="Logo" class="logo">
+                <h1>Welcome Back! <br> Sign in with your credentials.</h1>
+            </div>
 
             <div class="login-body">
                 <form method="POST" action="{{ route('login') }}">
@@ -31,20 +35,34 @@
                         @enderror
                     </div>
 
-                    <div class="input-group checkbox-group">
-                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label for="remember">{{ __('Remember Me') }}</label>
+                    <div class="input-group row">
+                        <div class="check">
+                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label for="remember">{{ __('Remember Me') }}</label>
+                        </div>
+                        <a class="forgot-password" href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
                     </div>
 
                     <div class="input-group">
-                        <button type="submit" class="submit-button">{{ __('Login') }}</button>
-                        @if (Route::has('password.request'))
-                            <a class="forgot-password"
-                                href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
-                        @endif
+                        <button type="submit" class="submit-button">{{ __('Sign In') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        <div class="copyright">
+            &copy; Copyright 2024. by Explore Dominica, All rights reserved.
+        </div>
+        <div class="links">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </div>
+@endsection
+
+@section('custom_css')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 @endsection

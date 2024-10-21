@@ -33,12 +33,16 @@
             </div>
             <div class="sidebar-main">
                 <div class="sidebar-main-head">
-                    {{-- <div class="search-bar">
-                        <input type="text" placeholder="Search..." />
-                        <button class="search-btn">⌘K</button>
-                    </div> --}}
-                    <ul class="menu-list">
-                        <li class="menu-item active" onclick="window.location='{{ route('dashboard') }}';"
+                    <div class="search">
+                        <div class="search-container">
+                            <span class="search-icon"><img src="{{ asset('images/search-icon.svg') }}"
+                                    alt=""></span>
+                            <input type="text" placeholder="Search..." class="search-input">
+                            <span class="search-shortcut">⌘K</span>
+                        </div>
+                    </div>
+                    <ul class="menu-list ">
+                        <li class="menu-item" onclick="window.location='{{ route('dashboard') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/home-line.svg') }}" alt=""> Dashboard
                         </li>
@@ -50,9 +54,11 @@
                         </li>
                         <li class="menu-item has-submenu">
                             <img src="{{ asset('images/app-side-icon.svg') }}" alt=""> App Menus <span
-                                class="submenu-icon">&#9662;</span>
+                                class="submenu-icon"><img src="{{ asset('images/caret-right.svg') }}"
+                                    alt=""></span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('about_us.edit') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> About Us
                         </li>
                         <li class="menu-item">
@@ -60,7 +66,8 @@
                         </li>
                         <li class="menu-item has-submenu">
                             <img src="{{ asset('images/achivement-side-icon.svg') }}" alt=""> Achievements
-                            <span class="submenu-icon">&#9662;</span>
+                            <span class="submenu-icon"><img src="{{ asset('images/caret-right.svg') }}"
+                                    alt=""></span>
                         </li>
                         <li class="menu-item">
                             <img src="{{ asset('images/push-side-icon.svg') }}" alt=""> Push Notifications

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Dashboard')
+
 @section('content')
     <div class="header-section">
         <div class="welcome">
@@ -8,10 +10,10 @@
             </div>
             <div class="welcome-sub-text">Update, manage and forecast your dominica adventures app data.</div>
         </div>
-        {{-- <div class="cta">
+        <div class="cta">
             <a href="" class="export-btn">Export</a>
             <a href="" class="download-app-btn">Share</a>
-        </div> --}}
+        </div>
     </div>
 
     <div class="alert">
@@ -101,6 +103,26 @@
             </div>
         </div>
     </div>
+
+
+    @if (session('success'))
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('success') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('custom_css')
@@ -118,4 +140,12 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
+
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                $('#successModal').modal('show'); // Automatically show the modal when there's a success message
+            });
+        </script>
+    @endif
 @endsection
