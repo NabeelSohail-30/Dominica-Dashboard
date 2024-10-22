@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\PushNotificationController;
 
 Auth::routes();
 
@@ -28,3 +29,8 @@ Route::post('/admin/edit_menu/{id}', [MenuController::class, 'update'])->name('m
 
 Route::get('/about-us/edit', [AboutUsController::class, 'edit'])->name('about_us.edit')->middleware('auth');
 Route::put('/about-us/update', [AboutUsController::class, 'update'])->name('about_us.update')->middleware('auth');
+
+
+Route::get('/push-notifications', [PushNotificationController::class, 'index'])->name('push_notifications.index')->middleware('auth');
+Route::get('/push-notifications/search', [PushNotificationController::class, 'search'])->name('push_notifications.search')->middleware('auth');
+Route::post('/push-notifications', [PushNotificationController::class, 'store'])->name('push_notifications.store')->middleware('auth');

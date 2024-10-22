@@ -69,7 +69,8 @@
                             <span class="submenu-icon"><img src="{{ asset('images/caret-right.svg') }}"
                                     alt=""></span>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('push_notifications.index') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/push-side-icon.svg') }}" alt=""> Push Notifications
                         </li>
                     </ul>

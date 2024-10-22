@@ -1,0 +1,51 @@
+.main {
+    padding: 0px;
+}
+
+.form-header .sub-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    width: 80%;
+}
+
+.form-header .sub-header .form-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+    width: auto;
+}
+
+.main-form {
+    margin-bottom: 0px;
+}
+
+.table-section {
+    padding: 15px 32px;
+}
+
+th.desc {
+    max-width: 453px !important;
+}
+
+th.sno {
+    min-width: 128px;
+}
+
+th.title {
+    min-width: 259px;
+}
+
+th.time {
+    min-width: 241px;
+}
+
+tbody td {
+    font-weight: 500;
+    font-size: 14px;
+    color: #181d27;
+}
