@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Weather Page')
+@section('title', 'Push Notification')
 
 @section('content')
     <form action="{{ route('push_notifications.store') }}" method="POST" enctype="multipart/form-data">
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <div class="form-text">
                         <label for="description">Description *</label>
-                        <span>Write a brief description about your app.</span>
+                        <span>Write a short description here.</span>
                     </div>
                     <textarea name="description" id="description" rows="5" placeholder="Enter description" required>{{ old('description') }}</textarea>
                 </div>
@@ -143,7 +143,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/weather.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/push_notification.css') }}">
     <style>
         .modal-backdrop {
             backdrop-filter: blur(5px);
