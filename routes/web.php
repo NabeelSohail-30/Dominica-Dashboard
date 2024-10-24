@@ -5,6 +5,7 @@ use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\PushNotificationController;
+use App\Http\Controllers\AchivementController;
 
 Auth::routes();
 
@@ -34,3 +35,9 @@ Route::put('/about-us/update', [AboutUsController::class, 'update'])->name('abou
 Route::get('/push-notifications', [PushNotificationController::class, 'index'])->name('push_notifications.index')->middleware('auth');
 Route::get('/push-notifications/search', [PushNotificationController::class, 'search'])->name('push_notifications.search')->middleware('auth');
 Route::post('/push-notifications', [PushNotificationController::class, 'store'])->name('push_notifications.store')->middleware('auth');
+
+Route::get('/achievements', [AchivementController::class, 'index'])->name('achievements.index')->middleware('auth');
+Route::get('/achievements/search', [AchivementController::class, 'search'])->name('achievements.search')->middleware('auth');
+Route::get('/achievements/create', [AchivementController::class, 'create'])->name('achievements.create')->middleware('auth');
+Route::post('/achievements/store', [AchivementController::class, 'store'])->name('achievements.store')->middleware('auth');
+Route::delete('/achievements/{id}', [AchivementController::class, 'destroy'])->name('achievements.destroy')->middleware('auth');
