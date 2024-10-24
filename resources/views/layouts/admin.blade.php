@@ -64,10 +64,9 @@
                         <li class="menu-item">
                             <img src="{{ asset('images/weather-side-icon.svg') }}" alt=""> Weather
                         </li>
-                        <li class="menu-item has-submenu">
+                        <li class="menu-item has-submenu"
+                            onclick="window.location='{{ route('achievements.index') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/achivement-side-icon.svg') }}" alt=""> Achievements
-                            <span class="submenu-icon"><img src="{{ asset('images/caret-right.svg') }}"
-                                    alt=""></span>
                         </li>
                         <li class="menu-item" onclick="window.location='{{ route('push_notifications.index') }}';"
                             style="cursor: pointer;">

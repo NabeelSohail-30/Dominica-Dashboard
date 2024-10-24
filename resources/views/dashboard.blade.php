@@ -17,7 +17,8 @@
     </div>
 
     <div class="alert">
-        <div class="alert-msg">Please ensure all adventure place details are up to date for accurate display in the mobile
+        <div class="alert-msg">⚠️ Please ensure all adventure place details are up to date for accurate display in the
+            mobile
             app</div>
         <div class="close-icon">
             <a href="#" onclick="closeAlert();">
