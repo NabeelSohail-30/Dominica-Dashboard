@@ -63,13 +63,25 @@
                 <!-- Color Image -->
                 <div class="form-group">
                     <label for="achievement_image_color">Color Image *</label>
-                    <input type="file" name="achievement_image_color" id="achievement_image_color" required>
+                    <div class="upload-box" onclick="document.getElementById('achievement_image_color').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
+                        <!-- Add 'name' attribute here -->
+                        <input type="file" name="achievement_image_color" id="achievement_image_color" required>
+                    </div>
                 </div>
 
                 <!-- Black & White Image -->
                 <div class="form-group">
                     <label for="achievement_image_bw">B&W Image *</label>
-                    <input type="file" name="achievement_image_bw" id="achievement_image_bw" required>
+                    <div class="upload-box" onclick="document.getElementById('achievement_image_bw').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
+                        <!-- Add 'name' attribute here -->
+                        <input type="file" name="achievement_image_bw" id="achievement_image_bw" required>
+                    </div>
                 </div>
 
                 <!-- Manual -->
@@ -103,7 +115,8 @@
 
     <!-- Display success message -->
     @if (session('success'))
-        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -175,5 +188,4 @@
             @endif
         });
     </script>
-
 @endsection

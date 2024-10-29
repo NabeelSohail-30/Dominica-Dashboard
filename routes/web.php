@@ -41,3 +41,5 @@ Route::get('/achievements/search', [AchivementController::class, 'search'])->nam
 Route::get('/achievements/create', [AchivementController::class, 'create'])->name('achievements.create')->middleware('auth');
 Route::post('/achievements/store', [AchivementController::class, 'store'])->name('achievements.store')->middleware('auth');
 Route::delete('/achievements/{id}', [AchivementController::class, 'destroy'])->name('achievements.destroy')->middleware('auth');
+Route::get('/achievements/{id}/edit', [AchivementController::class, 'edit'])->name('achievements.edit')->middleware('auth');
+Route::put('/achievements/{id}', [AchivementController::class, 'update'])->name('achievements.update')->middleware('auth');

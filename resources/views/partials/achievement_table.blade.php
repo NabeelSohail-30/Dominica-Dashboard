@@ -11,7 +11,8 @@
             <img src="{{ asset($achievement->achievement_image_bw) }}" alt="B&W Image" width="50">
         </td>
         <td class="action-btn">
-            <button class="edit-btn" onclick="editMenu({{ $achievement->id }})" data-tooltip="Edit">
+            <button class="edit-btn" onclick="window.location.href='{{ route('achievements.edit', $achievement->id) }}'"
+                data-tooltip="Edit">
                 <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
             </button>
             <button class="delete-btn" onclick="showDeleteModal({{ $achievement->id }})" data-tooltip="Delete">

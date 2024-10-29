@@ -177,7 +177,8 @@ label,
     color: #535862;
 }
 
-.form-group [type="text"] {
+.form-group input,
+.form-group select {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -214,12 +215,14 @@ label,
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: 1px solid #156c66;
 }
 
 .form-group input:hover,
-.form-group textarea:hover {
+.form-group textarea:hover,
+.form-group select:hover {
     outline: 1px solid #156c66;
 }
 

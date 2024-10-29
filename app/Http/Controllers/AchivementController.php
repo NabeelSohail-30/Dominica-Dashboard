@@ -127,4 +127,63 @@ class AchivementController extends Controller
         return response()->json(['status' => 'error', 'message' => 'Achievement not found'], 404);
     }
 
+    public function edit($id)
+    {
+        $achievement = Achievement::findOrFail($id);
+        return view('achievements.edit', compact('achievement'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'achievement_title' => 'required|string|max:255',
+            'achievement_push_title' => 'required|string|max:255',
+            'achievement_how_to_get_here' => 'required|string|max:255',
+            'achievement_description' => 'required|string',
+            'achievement_image_color' => 'nullable|file|image|max:2048',
+            'achievement_image_bw' => 'nullable|file|image|max:2048',
+            'achievement_lat' => 'nullable|numeric',
+            'achievement_long' => 'nullable|numeric',
+            'radius' => 'nullable|numeric',
+            'manual' => 'required|boolean',
+            'achievement_status' => 'required|boolean',
+        ]);
+
+        $achievement = Achievement::findOrFail($id);
+
+        // Define the path to save files
+        $uploadPath = 'uploads/images/';
+
+        // Handle file uploads if they are present
+        if ($request->hasFile('achievement_image_color')) {
+            $colorImageName = 'achievement_color_' . time() . '.' . $request->file('achievement_image_color')->getClientOriginalExtension();
+            $request->file('achievement_image_color')->move(public_path($uploadPath), $colorImageName);
+            // Save the full path (including the folder) to the database
+            $achievement->achievement_image_color = $uploadPath . $colorImageName;
+        }
+
+        if ($request->hasFile('achievement_image_bw')) {
+            $bwImageName = 'achievement_bw_' . time() . '.' . $request->file('achievement_image_bw')->getClientOriginalExtension();
+            $request->file('achievement_image_bw')->move(public_path($uploadPath), $bwImageName);
+            // Save the full path (including the folder) to the database
+            $achievement->achievement_image_bw = $uploadPath . $bwImageName;
+        }
+
+        // Update other fields
+        $achievement->achievement_title = $request->achievement_title;
+        $achievement->achievement_push_title = $request->achievement_push_title;
+        $achievement->achievement_how_to_get_here = $request->achievement_how_to_get_here;
+        $achievement->achievement_description = $request->achievement_description;
+        $achievement->achievement_lat = $request->achievement_lat;
+        $achievement->achievement_long = $request->achievement_long;
+        $achievement->radius = $request->radius;
+        $achievement->manual = $request->manual;
+        $achievement->achievement_status = $request->achievement_status;
+
+        // Save the updated achievement
+        $achievement->save();
+
+        return redirect()->route('achievements.index')->with('success', 'Achievement updated successfully');
+    }
+
 }
