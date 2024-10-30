@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\AchivementController;
+use App\Http\Controllers\RatingController;
 
 Auth::routes();
 
@@ -43,3 +44,6 @@ Route::post('/achievements/store', [AchivementController::class, 'store'])->name
 Route::delete('/achievements/{id}', [AchivementController::class, 'destroy'])->name('achievements.destroy')->middleware('auth');
 Route::get('/achievements/{id}/edit', [AchivementController::class, 'edit'])->name('achievements.edit')->middleware('auth');
 Route::put('/achievements/{id}', [AchivementController::class, 'update'])->name('achievements.update')->middleware('auth');
+
+Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index')->middleware('auth');
+Route::get('/ratings/search', [RatingController::class, 'search'])->name('ratings.search')->middleware('auth');

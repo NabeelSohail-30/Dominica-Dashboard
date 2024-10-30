@@ -61,6 +61,10 @@
                             style="cursor: pointer;">
                             <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> About Us
                         </li>
+                        <li class="menu-item" onclick="window.location='{{ route('ratings.index') }}';"
+                            style="cursor: pointer;">
+                            <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> All Comments
+                        </li>
                         <li class="menu-item">
                             <img src="{{ asset('images/weather-side-icon.svg') }}" alt=""> Weather
                         </li>
