@@ -120,4 +120,16 @@ class MenuController extends Controller
             ->route("dashboard")
             ->with("success", "Menu updated successfully.");
     }
+
+    public function edit_weather(Request $request)
+    {
+        // Decode the menu ID
+        $menuId = base64_decode(12);
+
+        // Find the menu item by ID
+        $menu = Menus::findOrFail($menuId);
+
+        // Return the edit view with the menu data
+        return view("weather/edit_weather", compact("menu"));
+    }
 }

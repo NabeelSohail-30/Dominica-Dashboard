@@ -28,6 +28,8 @@ Route::get('/menus/search', [MenuController::class, 'search'])->name('menu.searc
 Route::get('/admin/edit_menu/{id}', [MenuController::class, 'edit'])->name('menu.edit')->middleware('auth');
 Route::post('/admin/edit_menu/{id}', [MenuController::class, 'update'])->name('menu.update')->middleware('auth');
 
+Route::get('/weather/edit', [MenuController::class, 'edit_weather'])->name('menu.edit_weather')->middleware('auth');
+
 
 Route::get('/about-us/edit', [AboutUsController::class, 'edit'])->name('about_us.edit')->middleware('auth');
 Route::put('/about-us/update', [AboutUsController::class, 'update'])->name('about_us.update')->middleware('auth');
