@@ -7,6 +7,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\AchivementController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\FeaturedLocation;
 
 Auth::routes();
 
@@ -48,3 +49,5 @@ Route::put('/achievements/{id}', [AchivementController::class, 'update'])->name(
 
 Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index')->middleware('auth');
 Route::get('/ratings/search', [RatingController::class, 'search'])->name('ratings.search')->middleware('auth');
+
+Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('featured_location.index')->middleware('auth');

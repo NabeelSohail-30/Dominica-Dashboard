@@ -49,7 +49,8 @@
                         <li class="menu-item">
                             <img src="{{ asset('images/hike-icon.svg') }}" alt=""> Hike Details
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('featured_location.index') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/feature-side-icon.svg') }}" alt=""> Featured Locations
                         </li>
                         <li class="menu-item has-submenu">
