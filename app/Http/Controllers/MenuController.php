@@ -123,13 +123,66 @@ class MenuController extends Controller
 
     public function edit_weather(Request $request)
     {
-        // Decode the menu ID
-        $menuId = base64_decode(12);
-
-        // Find the menu item by ID
-        $menu = Menus::findOrFail($menuId);
+        // Find the menu item by the decoded ID
+        $menu = Menus::findOrFail(5);
 
         // Return the edit view with the menu data
-        return view("weather/edit_weather", compact("menu"));
+        return view("weather.edit_weather", compact("menu"));
     }
+
+    public function update_weather(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            "title" => "required|string|max:255",
+            "title_sp" => "nullable|string|max:255",
+            "title_fr" => "nullable|string|max:255",
+            "image" => "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "bg_image" => "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
+        ]);
+
+        // Find the menu item by ID
+        $menu = Menus::findOrFail(5);
+
+        // Handle the main image upload
+        if ($request->hasFile("image")) {
+            // Delete the old image if it exists
+            if ($menu->image && file_exists(public_path($menu->image))) {
+                unlink(public_path($menu->image));
+            }
+
+            // Store the new image in the 'uploads/images' directory
+            $imageName = time() . "." . $request->image->extension();
+            $request->image->move(public_path("uploads/images"), $imageName);
+            $menu->image = "uploads/images/" . $imageName; // Save the path in the database
+        }
+
+        // Handle the background image upload
+        if ($request->hasFile("bg_image")) {
+            // Delete the old background image if it exists
+            if ($menu->bg_image && file_exists(public_path($menu->bg_image))) {
+                unlink(public_path($menu->bg_image));
+            }
+
+            // Store the new background image in the 'uploads/bg_images' directory
+            $bgImageName = time() . "bg." . $request->bg_image->extension();
+            $request->bg_image->move(
+                public_path("uploads/bg_images"),
+                $bgImageName
+            );
+            $menu->bg_image = "uploads/bg_images/" . $bgImageName; // Save the path in the database
+        }
+
+        // Update the other fields
+        $menu->title = $request->input("title");
+        $menu->title_sp = $request->input("title_sp");
+        $menu->title_fr = $request->input("title_fr");
+        $menu->save(); // Save the changes
+
+        // Redirect to the dashboard with a success message
+        return redirect()
+            ->route("dashboard")
+            ->with("success", "Weather updated successfully.");
+    }
+
 }

@@ -65,7 +65,8 @@
                             style="cursor: pointer;">
                             <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> All Comments
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('weather.edit_weather') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/weather-side-icon.svg') }}" alt=""> Weather
                         </li>
                         <li class="menu-item has-submenu"

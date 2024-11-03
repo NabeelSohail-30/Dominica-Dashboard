@@ -3,17 +3,17 @@
 @section('title', 'Edit Menu')
 
 @section('content')
-    <form action="{{ route('menu.update', base64_encode($menu->id)) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('weather.update_weather') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-header">
-            <h2>App Menu</h2>
+            <h2>Weather</h2>
         </div>
 
         <div class="main-form">
             <div class="section main-head">
-                <h4>Edit Menu</h4>
-                <p>Update the information of your menu below.</p>
+                <h4>Edit Weather</h4>
+                <p>Update the information of weather below.</p>
             </div>
 
             <div class="section form">
