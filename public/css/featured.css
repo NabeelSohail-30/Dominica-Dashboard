@@ -46,3 +46,16 @@ tbody td {
     font-size: 14px;
     color: #181d27;
 }
+
+.featured_banner_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 200px;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

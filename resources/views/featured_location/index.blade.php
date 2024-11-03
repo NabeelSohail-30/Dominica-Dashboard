@@ -18,33 +18,21 @@
 
     <div class="table-section">
         <div class="filter-bar">
-            <select id="entriesPerPage" onchange="updateTable()">
-                <option value="10">Show 10 Entries</option>
-                <option value="25">Show 25 Entries</option>
-                <option value="50">Show 50 Entries</option>
-                <option value="100">Show 100 Entries</option>
-            </select>
-            <input type="text" id="search" placeholder="Search" onkeyup="updateTable()">
+            <div class="filter">
+                <select id="entriesPerPage" onchange="updateEntriesPerPage()">
+                    <option value="10">Show 10 Entries</option>
+                    <option value="25">Show 25 Entries</option>
+                    <option value="50">Show 50 Entries</option>
+                    <option value="100">Show 100 Entries</option>
+                </select>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search" onkeyup="searchTable()">
+            </div>
         </div>
 
         <div class="table-container" id="table-container">
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Banner</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="menuTableBody">
-                    @include('partials.featured_table', ['featuredDetails' => $featuredDetails])
-                </tbody>
-            </table>
-        </div>
-
-        <div class="pagination-section" id="pagination-section">
-            {{ $featuredDetails->links('pagination::bootstrap-4') }}
+            @include('partials.featured_table', ['featuredDetails' => $featuredDetails])
         </div>
     </div>
 @endsection
@@ -58,43 +46,56 @@
 @endsection
 
 @section('custom_js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        function updateTable(page = 1) {
-            const perPage = $('#entriesPerPage').val();
-            const search = $('#search').val();
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to fetch the table content using AJAX
+            function fetchTableContent(url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function(response) {
+                        $('#table-container').html(response);
+                        bindPaginationLinks(); // Bind the new pagination links
+                    }
+                });
+            }
 
-            $.ajax({
-                url: "{{ route('featured_location.index') }}",
-                type: "GET",
-                data: {
-                    search: search,
-                    per_page: perPage,
-                    page: page
-                },
-                success: function(data) {
-                    $('#menuTableBody').html(data); // Load new table rows
-                    updatePaginationLinks(search, perPage);
-                },
-                error: function(xhr) {
-                    console.error("Error fetching data:", xhr);
-                }
-            });
-        }
+            // Update the number of entries per page
+            function updateEntriesPerPage() {
+                let perPage = $('#entriesPerPage').val();
+                let url = "{{ route('featured_location.index') }}" + "?per_page=" + perPage + "&search=" + $(
+                    '#search').val();
+                fetchTableContent(url);
+            }
 
-        function updatePaginationLinks(search, perPage) {
-            $('#pagination-section .pagination a').each(function() {
-                let url = new URL(this.href);
-                url.searchParams.set('search', search);
-                url.searchParams.set('per_page', perPage);
-                this.href = url;
-            });
-        }
+            // Search functionality
+            function searchTable() {
+                let search = $('#search').val();
+                let url = "{{ route('featured_location.index') }}" + "?search=" + search + "&per_page=" + $(
+                    '#entriesPerPage').val();
+                fetchTableContent(url);
+            }
 
-        $(document).on('click', '#pagination-section .pagination a', function(e) {
-            e.preventDefault();
-            const url = $(this).attr('href');
-            const page = new URL(url).searchParams.get('page');
-            updateTable(page);
+            // Bind pagination links for AJAX
+            function bindPaginationLinks() {
+                $(document).off('click', '.pagination a'); // Remove existing bindings
+                $(document).on('click', '.pagination a', function(event) {
+                    event.preventDefault();
+                    let url = $(this).attr('href');
+                    fetchTableContent(url);
+                });
+            }
+
+            // Bind change and keyup events
+            $('#entriesPerPage').change(updateEntriesPerPage);
+            $('#search').keyup(searchTable);
+
+            // Initial binding for pagination links
+            bindPaginationLinks();
         });
     </script>
 @endsection
