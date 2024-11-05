@@ -51,3 +51,4 @@ Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index'
 Route::get('/ratings/search', [RatingController::class, 'search'])->name('ratings.search')->middleware('auth');
 
 Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('featured_location.index')->middleware('auth');
+Route::get('/featured_location/create', [FeaturedLocation::class, 'create'])->name('featured_location.create')->middleware('auth');

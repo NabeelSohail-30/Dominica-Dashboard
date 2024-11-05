@@ -29,4 +29,9 @@ class FeaturedLocation extends Controller
 
         return view('featured_location.index', compact('featuredDetails'));
     }
+
+    public function create(Request $request)
+    {
+        return view('featured_location.create');
+    }
 }

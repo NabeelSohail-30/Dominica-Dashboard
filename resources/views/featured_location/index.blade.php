@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Featured Location')
+
 @section('content')
     <div class="form-header">
         <div class="bread-crumb">
@@ -10,7 +12,7 @@
         <div class="sub-header">
             <h2>Featured Location</h2>
             <div class="form-actions">
-                <button class="btn-save" onclick="window.location.href='{{ route('achievements.create') }}'">Add New
+                <button class="btn-save" onclick="window.location.href='{{ route('featured_location.create') }}'">Add New
                     Location</button>
             </div>
         </div>
