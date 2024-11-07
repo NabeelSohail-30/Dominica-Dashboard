@@ -46,7 +46,8 @@
                             style="cursor: pointer;">
                             <img src="{{ asset('images/home-line.svg') }}" alt=""> Dashboard
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('hike.index') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/hike-icon.svg') }}" alt=""> Hike Details
                         </li>
                         <li class="menu-item" onclick="window.location='{{ route('featured_location.index') }}';"

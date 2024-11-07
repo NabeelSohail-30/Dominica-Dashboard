@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HikeDetailsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Auth;
@@ -52,3 +53,5 @@ Route::get('/ratings/search', [RatingController::class, 'search'])->name('rating
 
 Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('featured_location.index')->middleware('auth');
 Route::get('/featured_location/create', [FeaturedLocation::class, 'create'])->name('featured_location.create')->middleware('auth');
+
+Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
