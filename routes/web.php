@@ -55,3 +55,6 @@ Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('feat
 Route::get('/featured_location/create', [FeaturedLocation::class, 'create'])->name('featured_location.create')->middleware('auth');
 
 Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
+Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');
+
+Route::get('/hike-details', [HikeDetailsController::class, 'index_relationed'])->name('hike.details.index');

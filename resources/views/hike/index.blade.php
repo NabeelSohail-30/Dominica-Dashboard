@@ -32,10 +32,6 @@
         <div class="table-container" id="table-container">
             @include('partials.hike_table', ['registrations' => $registrations])
         </div>
-
-        <div class="pagination-section">
-            {{ $registrations->appends(['search' => request('search'), 'sort' => request('sort'), 'order' => request('order'), 'per_page' => request('per_page')])->links('pagination::bootstrap-4') }}
-        </div>
     </div>
 @endsection
 
@@ -53,6 +49,10 @@
             margin-top: 120px;
             padding: 32px;
         }
+
+        .pagination-section {
+            margin-top: 15px;
+        }
     </style>
 @endsection
 
@@ -60,16 +60,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // AJAX setup
-        function loadTable() {
+        // AJAX setup for loading table data
+        function loadTable(page = 1) {
             $.ajax({
                 url: "{{ route('hike.index') }}",
                 type: "GET",
                 data: {
                     search: $('#search').val(),
-                    per_page: $('#entriesPerPage').val(),
                     sort: "{{ request('sort', 'first_name') }}",
-                    order: "{{ request('order', 'asc') }}"
+                    order: "{{ request('order', 'asc') }}",
+                    entriesPerPage: $('#entriesPerPage').val(),
+                    page: page // Include the page parameter for pagination
                 },
                 success: function(response) {
                     $('#table-container').html(response);
@@ -77,24 +78,13 @@
             });
         }
 
-        // Event listeners for search and pagination
+        // Event listeners for search, pagination, and sorting
         $('#search').on('keyup', function() {
             loadTable();
         });
 
         $('#entriesPerPage').on('change', function() {
             loadTable();
-        });
-
-        $(document).on('click', '.pagination a', function(e) {
-            e.preventDefault();
-            let url = $(this).attr('href');
-            $.ajax({
-                url: url,
-                success: function(response) {
-                    $('#table-container').html(response);
-                }
-            });
         });
 
         $(document).on('click', '.sortable', function(e) {
@@ -105,14 +95,22 @@
                 url: "{{ route('hike.index') }}",
                 data: {
                     search: $('#search').val(),
-                    per_page: $('#entriesPerPage').val(),
                     sort: sort,
-                    order: order
+                    order: order,
+                    entriesPerPage: $('#entriesPerPage').val()
                 },
                 success: function(response) {
                     $('#table-container').html(response);
                 }
             });
         });
+
+        // Event listener for pagination links
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            loadTable(page); // Call loadTable with the page number
+        });
     </script>
+
 @endsection

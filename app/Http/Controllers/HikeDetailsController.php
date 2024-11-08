@@ -25,8 +25,8 @@ class HikeDetailsController extends Controller
         $order = $request->input('order', 'asc'); // Default order is ascending
         $query->orderBy($sort, $order);
 
-        // Pagination and entries per page
-        $perPage = $request->input('per_page', 10); // Default is 10 entries per page
+        // Pagination size
+        $perPage = $request->input('entriesPerPage', 10); // Default to 10 entries per page
         $registrations = $query->paginate($perPage);
 
         // AJAX response
@@ -36,4 +36,28 @@ class HikeDetailsController extends Controller
 
         return view('hike.index', compact('registrations'));
     }
+
+
+    public function index_relationed()
+    {
+        // Fetch all HikeDetails with their associated LocationTracking records
+        $hikeDetails = HikeDetails::with('locationTracking')->get();
+
+        // Pass the data to the view
+        return view('hike_details.index', compact('hikeDetails'));
+    }
+
+    public function detail(Request $request, $id)
+    {
+        // Fetch the HikeDetails record based on the given ID
+        $hikeDetails = HikeDetails::findOrFail($id);
+
+        // Fetch the paginated LocationTracking records
+        $locationTracking = $hikeDetails->locationTracking()->paginate(10);
+
+        // Pass both HikeDetails and paginated LocationTracking data to the view
+        return view('hike.detail', compact('hikeDetails', 'locationTracking'));
+    }
+
+
 }

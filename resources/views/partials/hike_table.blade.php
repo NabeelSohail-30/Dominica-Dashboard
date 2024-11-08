@@ -17,7 +17,7 @@
             </th>
             <th>Expected Completion Time</th>
             <th>Phone Number</th>
-            <th>Is Active</th>
+            <th>Status</th>
             <th></th>
         </tr>
     </thead>
@@ -28,9 +28,10 @@
                 <td>{{ $registration->last_name }}</td>
                 <td>{{ $registration->expected_completion_datetime }}</td>
                 <td>{{ $registration->phone_number }}</td>
-                <td>{{ $registration->is_active ? 'Active' : 'Inactive' }}</td>
+                <td>{{ $registration->is_active ? 'Pending Hikes' : 'Completed Hikes' }}</td>
                 <td>
-                    <button class="view-btn" data-tooltip="View" onclick="alert('{{ $registration->id }}')">
+                    <button class="view-btn" data-tooltip="View"
+                        onclick="window.location.href='{{ route('hike.detail', ['id' => $registration->id]) }}'">
                         <img src="{{ asset('images/view-icon.svg') }}" alt="View">
                     </button>
                 </td>
@@ -38,3 +39,13 @@
         @endforeach
     </tbody>
 </table>
+
+<!-- Pagination Controls -->
+<div class="pagination-section">
+    <div class="pagination">
+        {{ $registrations->withQueryString()->links('pagination::bootstrap-4') }}
+    </div>
+    <div class="record-summary">
+        Page {{ $registrations->currentPage() }} of {{ $registrations->lastPage() }}
+    </div>
+</div>

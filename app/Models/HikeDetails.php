@@ -27,4 +27,10 @@ class HikeDetails extends Model
         'created_at',
         'user_id'
     ];
+
+    // Define the relationship to the LocationTracking model
+    public function locationTracking()
+    {
+        return $this->hasMany(HikeLocationTracking::class, 'registration_id');
+    }
 }
