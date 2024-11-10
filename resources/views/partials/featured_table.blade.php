@@ -20,7 +20,7 @@
                     </span>
                 </td>
                 <td class="action-btn">
-                    <button class="delete-btn">
+                    <button class="delete-btn" onclick="alert('delete {{ $detail->id }}');">
                         <img src="{{ asset('images/delete-icon.svg') }}" alt="Delete">
                     </button>
                     <button class="edit-btn" onclick="editMenu({{ $detail->id }})">

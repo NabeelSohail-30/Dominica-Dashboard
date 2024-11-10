@@ -53,8 +53,7 @@ Route::get('/ratings/search', [RatingController::class, 'search'])->name('rating
 
 Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('featured_location.index')->middleware('auth');
 Route::get('/featured_location/create', [FeaturedLocation::class, 'create'])->name('featured_location.create')->middleware('auth');
+Route::post('/featured_location/store', [FeaturedLocation::class, 'store'])->name('featured_location.store')->middleware('auth');
 
 Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
 Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');
-
-Route::get('/hike-details', [HikeDetailsController::class, 'index_relationed'])->name('hike.details.index');

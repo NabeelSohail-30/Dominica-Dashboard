@@ -17,7 +17,7 @@
     </div>
 
     <!-- Form Section -->
-    <form id="customForm" action="{{ route('featured_location.index') }}" method="POST" enctype="multipart/form-data">
+    <form id="customForm" action="{{ route('featured_location.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="main-form">
@@ -123,16 +123,19 @@
             <!-- Gallery Images -->
             <div class="form-group">
                 <label for="gallery_images">Gallery Images</label>
-                <select name="" id="">
-                    <option value="">Yes</option>
-                    <option value="">No</option>
+                <select name="status" id="status">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
                 </select>
             </div>
 
             <!-- Gallery Videos -->
             <div class="form-group">
                 <label for="gallery_videos">Gallery Videos</label>
-                <input type="file" name="gallery_videos[]" id="gallery_videos" multiple>
+                <select name="vgallery_status" id="vgallery_status">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
             </div>
 
             <!-- Booking URL -->
