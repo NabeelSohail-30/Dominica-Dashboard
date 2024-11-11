@@ -9,6 +9,7 @@ use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\AchivementController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\FeaturedLocation;
+use App\Http\Controllers\ListingController;
 
 Auth::routes();
 
@@ -29,6 +30,8 @@ Route::get('/menus/search', [MenuController::class, 'search'])->name('menu.searc
 // Add this route for editing a menu item
 Route::get('/admin/edit_menu/{id}', [MenuController::class, 'edit'])->name('menu.edit')->middleware('auth');
 Route::post('/admin/edit_menu/{id}', [MenuController::class, 'update'])->name('menu.update')->middleware('auth');
+
+Route::get('/menus/listing/{id}', [ListingController::class, 'index'])->name('listing')->middleware('auth');
 
 Route::get('/weather/edit', [MenuController::class, 'edit_weather'])->name('weather.edit_weather')->middleware('auth');
 Route::post('/weather/update', [MenuController::class, 'update_weather'])->name('weather.update_weather')->middleware('auth');

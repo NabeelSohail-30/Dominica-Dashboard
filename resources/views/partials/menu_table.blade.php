@@ -15,7 +15,8 @@
             <button class="edit-btn" onclick="editMenu({{ $menu->id }})" data-tooltip="Edit">
                 <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
             </button>
-            <button class="view-btn" data-tooltip="View">
+            <button class="view-btn" data-tooltip="View"
+                onclick="window.location='{{ route('listing', ['id' => $menu->id]) }}';">
                 <img src="{{ asset('images/view-icon.svg') }}" alt="View">
             </button>
         </td>
