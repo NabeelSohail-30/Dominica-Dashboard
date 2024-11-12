@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\HikeDetailsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
@@ -60,3 +61,5 @@ Route::post('/featured_location/store', [FeaturedLocation::class, 'store'])->nam
 
 Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
 Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');
+
+Route::get('details/{id}', [DetailsController::class, 'index'])->name('details.index')->middleware('auth');

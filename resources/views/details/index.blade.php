@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+@section('title', 'Details')
 
 @section('content')
     <div class="form-header">
@@ -10,9 +10,11 @@
             <span>Menu</span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
             <span>Listing</span>
+            <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
+            <span>Details</span>
         </div>
         <div class="sub-header">
-            <h2>Listing</h2>
+            <h2>Details</h2>
         </div>
     </div>
 
@@ -38,8 +40,8 @@
         </div>
 
         <div class="table-container">
-            @if ($listings->isEmpty())
-                <p>No listings found for this menu.</p>
+            @if ($details->isEmpty())
+                <p>No details found for this menu.</p>
             @else
                 <table class="custom-table">
                     <thead>
@@ -50,25 +52,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($listings as $listing)
+                        @foreach ($details as $details)
                             <tr>
                                 <td>
                                     <div class="menu-info">
-                                        <img src="{{ asset($listing->image) }}" alt="{{ $listing->title }}">
-                                        <span>{{ $listing->title }}</span>
+                                        <img src="{{ asset($details->image) }}" alt="{{ $details->title }}">
+                                        <span>{{ $details->title }}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="status {{ $listing->status == 1 ? 'active' : 'disabled' }}">
-                                        {{ $listing->status == 1 ? 'Active' : 'Deactive' }}
+                                    <span class="status {{ $details->status == 1 ? 'active' : 'disabled' }}">
+                                        {{ $details->status == 1 ? 'Active' : 'Deactive' }}
                                     </span>
                                 </td>
                                 <td class="action-btn">
                                     <button class="edit-btn" data-tooltip="Edit">
                                         <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
                                     </button>
-                                    <button class="view-btn" data-tooltip="View"
-                                        onclick="window.location='{{ route('details.index', ['id' => $listing->id]) }}';">
+                                    <button class="view-btn" data-tooltip="View">
                                         <img src="{{ asset('images/view-icon.svg') }}" alt="View">
                                     </button>
                                 </td>
@@ -110,34 +111,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@endsection
-
-
-@section('content')
-    <div class="container">
-        <h1>Listings for Menu ID: {{ request()->route('id') }}</h1>
-
-        @if ($listings->isEmpty())
-            <p>No listings found for this menu.</p>
-        @else
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Website Link</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($listings as $listing)
-                        <tr>
-                            <td>{{ $listing->title }}</td>
-                            <td><a href="{{ $listing->website_link }}" target="_blank">Link</a></td>
-                            <td>{{ $listing->status ? 'Active' : 'Inactive' }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
 @endsection
