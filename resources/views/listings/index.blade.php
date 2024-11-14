@@ -13,6 +13,10 @@
         </div>
         <div class="sub-header">
             <h2>Listing</h2>
+            <div class="form-actions">
+                <button class="btn-save" onclick="window.location.href='{{ route('listing.create', ['id' => $id]) }}'">Add
+                    New</button>
+            </div>
         </div>
     </div>
 
@@ -64,12 +68,21 @@
                                     </span>
                                 </td>
                                 <td class="action-btn">
-                                    <button class="edit-btn" data-tooltip="Edit">
+                                    <button class="edit-btn" data-tooltip="Edit"
+                                        onclick="window.location='{{ route('listing.edit', ['id' => $listing->id]) }}';">
                                         <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
                                     </button>
                                     <button class="view-btn" data-tooltip="View"
                                         onclick="window.location='{{ route('details.index', ['id' => $listing->id]) }}';">
                                         <img src="{{ asset('images/view-icon.svg') }}" alt="View">
+                                    </button>
+                                    <button class="btn" data-tooltip="Deactivate">
+                                        <form action="{{ route('listing.deactivate', ['id' => $listing->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="submit" value="Deactivate">
+                                        </form>
                                     </button>
                                 </td>
                             </tr>
@@ -99,6 +112,24 @@
             margin-top: 120px;
             padding: 32px;
         }
+
+        .form-header .sub-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px;
+            width: 80%;
+        }
+
+        .form-header .sub-header .form-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 12px;
+            width: auto;
+        }
     </style>
 @endsection
 
@@ -110,34 +141,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@endsection
-
-
-@section('content')
-    <div class="container">
-        <h1>Listings for Menu ID: {{ request()->route('id') }}</h1>
-
-        @if ($listings->isEmpty())
-            <p>No listings found for this menu.</p>
-        @else
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Website Link</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($listings as $listing)
-                        <tr>
-                            <td>{{ $listing->title }}</td>
-                            <td><a href="{{ $listing->website_link }}" target="_blank">Link</a></td>
-                            <td>{{ $listing->status ? 'Active' : 'Inactive' }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
 @endsection

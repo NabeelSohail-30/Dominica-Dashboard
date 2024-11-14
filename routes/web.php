@@ -33,6 +33,11 @@ Route::get('/admin/edit_menu/{id}', [MenuController::class, 'edit'])->name('menu
 Route::post('/admin/edit_menu/{id}', [MenuController::class, 'update'])->name('menu.update')->middleware('auth');
 
 Route::get('/menus/listing/{id}', [ListingController::class, 'index'])->name('listing')->middleware('auth');
+Route::get('/listing/create/{id}', [ListingController::class, 'create'])->name('listing.create')->middleware('auth');
+Route::post('/menus/listing/store/{id}', [ListingController::class, 'store'])->name('listing.store')->middleware('auth');
+Route::get('/menus/listing/edit/{id}', [ListingController::class, 'edit'])->name('listing.edit')->middleware('auth');
+Route::put('/menus/listing/update/{id}', [ListingController::class, 'update'])->name('listing.update')->middleware('auth');
+Route::put('/menus/listing/deactivate/{id}', [ListingController::class, 'deactivate'])->name('listing.deactivate')->middleware('auth');
 
 Route::get('/weather/edit', [MenuController::class, 'edit_weather'])->name('weather.edit_weather')->middleware('auth');
 Route::post('/weather/update', [MenuController::class, 'update_weather'])->name('weather.update_weather')->middleware('auth');
