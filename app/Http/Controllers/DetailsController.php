@@ -15,4 +15,9 @@ class DetailsController extends Controller
         // Return the view with the retrieved listings
         return view('details.index', compact('details'));
     }
+
+    public function create()
+    {
+        return view('details.create');
+    }
 }

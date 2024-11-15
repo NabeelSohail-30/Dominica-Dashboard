@@ -68,3 +68,4 @@ Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')
 Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');
 
 Route::get('details/{id}', [DetailsController::class, 'index'])->name('details.index')->middleware('auth');
+Route::get('details/create', [DetailsController::class, 'create'])->name('details.create')->middleware('auth');

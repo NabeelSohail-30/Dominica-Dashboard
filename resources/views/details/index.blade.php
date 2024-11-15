@@ -15,6 +15,9 @@
         </div>
         <div class="sub-header">
             <h2>Details</h2>
+            <div class="form-actions">
+                <button class="btn-save">Add New</button>
+            </div>
         </div>
     </div>
 
@@ -99,6 +102,24 @@
         .table-section {
             margin-top: 120px;
             padding: 32px;
+        }
+
+        .form-header .sub-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px;
+            width: 80%;
+        }
+
+        .form-header .sub-header .form-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 12px;
+            width: auto;
         }
     </style>
 @endsection
