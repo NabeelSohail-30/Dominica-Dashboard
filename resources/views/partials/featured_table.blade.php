@@ -20,9 +20,14 @@
                     </span>
                 </td>
                 <td class="action-btn">
-                    <button class="delete-btn" onclick="alert('delete {{ $detail->id }}');">
-                        <img src="{{ asset('images/delete-icon.svg') }}" alt="Delete">
-                    </button>
+                    <form action="{{ route('featured_location.destroy', $detail->id) }}" method="POST"
+                        style="width: auto">
+                        @csrf
+                        @method('DELETE')
+                        <button class="delete-btn">
+                            <img src="{{ asset('images/delete-icon.svg') }}" alt="Delete">
+                        </button>
+                    </form>
                     <button class="edit-btn" onclick="editMenu({{ $detail->id }})">
                         <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
                     </button>

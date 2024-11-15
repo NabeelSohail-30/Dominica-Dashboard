@@ -40,74 +40,90 @@ class FeaturedLocation extends Controller
         // Validate the required fields and file input
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'sub_title' => 'nullable|string|max:255',
-            'push_welcome_title' => 'nullable|string|max:255',
-            'push_body' => 'nullable|string',
+            'sub_title' => 'required|string|max:255',
+            'push_welcome_title' => 'required|string|max:255',
+            'push_body' => 'required|string',
             'description' => 'required|string',
-            'description_2' => 'nullable|string',
-            'description_sp' => 'nullable|string',
-            'description_fr' => 'nullable|string',
-            'background_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048', // max 2MB
-            'email' => 'nullable|email',
-            'phone' => 'nullable|string',
-            'whatsappNum' => 'nullable|string',
-            'location' => 'nullable|string|max:255',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-            'gallery_images' => 'nullable|boolean',
-            'booking_url' => 'nullable|url',
+            'description_2' => 'required|string',
+            'description_sp' => 'required|string',
+            'description_fr' => 'required|string',
+            'background_image' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048', // max 2MB
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'whatsappNum' => 'required|string',
+            'website' => 'required|string',
+            'location' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'gallery_status' => 'required|in:1,0', // Ensure alignment with form select
+            'vgallery_status' => 'required|in:1,0',
+            'booking_url' => 'required|url',
         ]);
 
-        // Handle background image upload if provided
-        $backgroundImagePath = $request->hasFile('background_image')
-            ? $request->file('background_image')->store('images', 'public')
-            : null;
+        $backgroundImagePath = 'uploads/bg_images/bg_image' . time() . '.' . $request->file('background_image')->getClientOriginalExtension();
+        $request->file('background_image')->move(public_path('uploads/bg_images'), basename($backgroundImagePath));
 
         // Create a new Details entry in the database
         Details::create([
-            'menu_list_id' => null,
-            'menu_type' => null,
+            'menu_list_id' => 0,
+            'menu_type' => 0,
             'title' => $validatedData['title'],
-            'sub_title' => $validatedData['sub_title'] ?? null,
-            'push_welcome_title' => $validatedData['push_welcome_title'] ?? null,
-            'push_body' => $validatedData['push_body'] ?? null,
+            'sub_title' => $validatedData['sub_title'],
+            'push_welcome_title' => $validatedData['push_welcome_title'],
+            'push_body' => $validatedData['push_body'],
             'description' => $validatedData['description'],
-            'description_2' => $validatedData['description_2'] ?? null,
-            'description_sp' => $validatedData['description_sp'] ?? null,
-            'description_fr' => $validatedData['description_fr'] ?? null,
-            'flag_image_id' => null,
-            'flag' => null,
-            'latitude' => $validatedData['latitude'] ?? null,
-            'longitude' => $validatedData['longitude'] ?? null,
-            'location' => $validatedData['location'] ?? null,
+            'description_2' => $validatedData['description_2'],
+            'description_sp' => $validatedData['description_sp'],
+            'description_fr' => $validatedData['description_fr'],
+            'flag_image_id' => $backgroundImagePath,
+            'flag' => $backgroundImagePath,
+            'latitude' => $validatedData['latitude'],
+            'longitude' => $validatedData['longitude'],
+            'radius' => 25,
+            'location' => $validatedData['location'],
+            'image_id' => $backgroundImagePath,
+            'image' => $backgroundImagePath,
             'bg_image' => $backgroundImagePath, // Assign background image path
-            'image' => null,
-            'bg_image_id' => null,
-            'year' => null,
-            'date' => null,
-            'day' => null,
-            'timing' => null,
-            'email' => $validatedData['email'] ?? null,
-            'phone' => $validatedData['phone'] ?? null,
-            'whatsappNum' => $validatedData['whatsappNum'] ?? null,
-            'website' => null,
-            'video' => null,
+            'bg_image_id' => $backgroundImagePath,
+            'year' => '',
+            'date' => '',
+            'day' => '',
+            'timing' => '',
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'whatsappNum' => $validatedData['whatsappNum'],
+            'website' => $validatedData['website'],
+            'video' => '',
             'badge' => null,
-            'geo_fencing' => $validatedData['gallery_images'] ?? false,
+            'geo_fencing' => "0",
             'achievement_ids' => null,
-            'gallery_status' => $validatedData['gallery_images'] ?? false,
+            'gallery_status' => $validatedData['gallery_status'],
             'nearby' => null,
-            'status' => null,
-            'booking_url' => $validatedData['booking_url'] ?? null,
+            'status' => "1",
+            'vgallery_status' => $validatedData['vgallery_status'],
+            'booking_url' => $validatedData['booking_url'],
             'registration_link' => null,
-            'is_featured' => false,
+            'is_featured' => "1",
             'featured_banner' => $backgroundImagePath,
-            'has_trail' => false,
-            'has_360' => false,
+            'has_trail' => null,
+            'has_360' => null,
         ]);
 
         // Redirect to a success page with a success message
         return redirect()->route('featured_location.index')->with('success', 'Location has been saved successfully.');
+    }
+
+    public function destroy($id)
+    {
+        // Find the record by ID
+        $record = Details::find($id);
+
+        if ($record) {
+            $record->delete();
+            return redirect()->back()->with('success', 'Record deleted successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Record not found.');
     }
 
 }

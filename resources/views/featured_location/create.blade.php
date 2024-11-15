@@ -30,22 +30,22 @@
 
             <!-- Sub Title -->
             <div class="form-group">
-                <label for="sub_title">Sub Title</label>
+                <label for="sub_title">Sub Title *</label>
                 <input type="text" name="sub_title" id="sub_title" value="{{ old('sub_title') }}"
-                    placeholder="e.g. Sub Title">
+                    placeholder="e.g. Sub Title" required>
             </div>
 
             <!-- Push Welcome Title -->
             <div class="form-group">
-                <label for="push_welcome_title">Push Welcome Title</label>
+                <label for="push_welcome_title">Push Welcome Title *</label>
                 <input type="text" name="push_welcome_title" id="push_welcome_title"
-                    value="{{ old('push_welcome_title') }}" placeholder="e.g. Push Welcome Title">
+                    value="{{ old('push_welcome_title') }}" placeholder="e.g. Push Welcome Title" required>
             </div>
 
             <!-- Push Notification Body -->
             <div class="form-group">
-                <label for="push_body">Push Notification Body</label>
-                <textarea name="push_body" id="push_body" rows="3" placeholder="Enter push notification body">{{ old('push_body') }}</textarea>
+                <label for="push_body">Push Notification Body *</label>
+                <textarea name="push_body" id="push_body" rows="3" placeholder="Enter push notification body" required>{{ old('push_body') }}</textarea>
             </div>
 
             <!-- Description -->
@@ -56,74 +56,81 @@
 
             <!-- Description2 -->
             <div class="form-group">
-                <label for="description_2">Description2</label>
-                <textarea name="description_2" id="description_2" rows="5" placeholder="Enter additional description">{{ old('description_2') }}</textarea>
+                <label for="description_2">Description2 *</label>
+                <textarea name="description_2" id="description_2" rows="5" placeholder="Enter additional description" required>{{ old('description_2') }}</textarea>
             </div>
 
             <!-- Description in Spanish -->
             <div class="form-group">
-                <label for="description_sp">Description Spanish</label>
-                <textarea name="description_sp" id="description_sp" rows="5" placeholder="Descripción en español">{{ old('description_sp') }}</textarea>
+                <label for="description_sp">Description Spanish *</label>
+                <textarea name="description_sp" id="description_sp" rows="5" placeholder="Descripción en español" required>{{ old('description_sp') }}</textarea>
             </div>
 
             <!-- Description in French -->
             <div class="form-group">
-                <label for="description_fr">Description French</label>
-                <textarea name="description_fr" id="description_fr" rows="5" placeholder="Description en français">{{ old('description_fr') }}</textarea>
+                <label for="description_fr">Description French *</label>
+                <textarea name="description_fr" id="description_fr" rows="5" placeholder="Description en français" required>{{ old('description_fr') }}</textarea>
             </div>
 
             <!-- Background Image -->
             <div class="form-group">
-                <label for="background_image">Background Image</label>
-                <input type="file" name="background_image" id="background_image">
+                <label for="background_image">Background Image *</label>
+                <input type="file" name="background_image" id="background_image" required>
             </div>
 
             <!-- Email -->
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email *</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}"
-                    placeholder="e.g. email@example.com">
+                    placeholder="e.g. email@example.com" required>
             </div>
 
             <!-- Phone -->
             <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone">Phone *</label>
                 <input type="tel" name="phone" id="phone" value="{{ old('phone') }}"
-                    placeholder="e.g. +1234567890">
+                    placeholder="e.g. +1234567890" required maxlength="15">
             </div>
 
             <!-- WhatsApp Number -->
             <div class="form-group">
-                <label for="whatsappNum">WhatsApp Number</label>
+                <label for="whatsappNum">WhatsApp Number *</label>
                 <input type="tel" name="whatsappNum" id="whatsappNum" value="{{ old('whatsappNum') }}"
-                    placeholder="e.g. +1234567890">
+                    placeholder="e.g. +1234567890" required maxlength="15">
+            </div>
+
+            <!-- Website -->
+            <div class="form-group">
+                <label for="website">Website Link *</label>
+                <input type="url" name="website" id="website" value="{{ old('website') }}"
+                    placeholder="www.admin.com" required>
             </div>
 
             <!-- Location -->
             <div class="form-group">
-                <label for="location">Location</label>
+                <label for="location">Location *</label>
                 <input type="text" name="location" id="location" value="{{ old('location') }}"
-                    placeholder="e.g. City, Country">
+                    placeholder="e.g. City, Country" required>
             </div>
 
             <!-- Latitude -->
             <div class="form-group">
-                <label for="latitude">Latitude</label>
+                <label for="latitude">Latitude *</label>
                 <input type="number" step="0.000001" name="latitude" id="latitude" value="{{ old('latitude') }}"
-                    placeholder="e.g. 34.0522">
+                    placeholder="e.g. 34.0522" required>
             </div>
 
             <!-- Longitude -->
             <div class="form-group">
-                <label for="longitude">Longitude</label>
+                <label for="longitude">Longitude *</label>
                 <input type="number" step="0.000001" name="longitude" id="longitude" value="{{ old('longitude') }}"
-                    placeholder="e.g. -118.2437">
+                    placeholder="e.g. -118.2437" required>
             </div>
 
             <!-- Gallery Images -->
             <div class="form-group">
-                <label for="gallery_images">Gallery Images</label>
-                <select name="status" id="status">
+                <label for="gallery_images">Gallery Images *</label>
+                <select name="gallery_status" id="gallery_status" required>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
@@ -131,8 +138,8 @@
 
             <!-- Gallery Videos -->
             <div class="form-group">
-                <label for="gallery_videos">Gallery Videos</label>
-                <select name="vgallery_status" id="vgallery_status">
+                <label for="gallery_videos">Gallery Videos *</label>
+                <select name="vgallery_status" id="vgallery_status" required>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
@@ -140,9 +147,9 @@
 
             <!-- Booking URL -->
             <div class="form-group">
-                <label for="booking_url">Booking URL</label>
+                <label for="booking_url">Booking URL *</label>
                 <input type="url" name="booking_url" id="booking_url" value="{{ old('booking_url') }}"
-                    placeholder="e.g. https://booking.example.com">
+                    placeholder="e.g. https://booking.example.com" required>
             </div>
         </div>
 
