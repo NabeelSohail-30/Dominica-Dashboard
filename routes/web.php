@@ -64,6 +64,8 @@ Route::get('/featured_location', [FeaturedLocation::class, 'index'])->name('feat
 Route::get('/featured_location/create', [FeaturedLocation::class, 'create'])->name('featured_location.create')->middleware('auth');
 Route::post('/featured_location/store', [FeaturedLocation::class, 'store'])->name('featured_location.store')->middleware('auth');
 Route::delete('/featured_location/delete/{id}', [FeaturedLocation::class, 'destroy'])->name('featured_location.destroy')->middleware('auth');
+Route::get('featured_location/{id}/edit', [FeaturedLocation::class, 'edit'])->name('featured_location.edit')->middleware('auth');
+Route::put('featured_location/{id}', [FeaturedLocation::class, 'update'])->name('featured_location.update')->middleware('auth');
 
 Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
 Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');

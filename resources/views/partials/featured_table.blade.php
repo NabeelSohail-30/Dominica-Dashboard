@@ -28,7 +28,8 @@
                             <img src="{{ asset('images/delete-icon.svg') }}" alt="Delete">
                         </button>
                     </form>
-                    <button class="edit-btn" onclick="editMenu({{ $detail->id }})">
+                    <button class="edit-btn"
+                        onclick="window.location.href='{{ route('featured_location.edit', $detail->id) }}'">
                         <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
                     </button>
                 </td>
