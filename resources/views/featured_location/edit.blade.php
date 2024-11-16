@@ -75,14 +75,45 @@
                 <textarea name="description_fr" id="description_fr" rows="5" placeholder="Description en français" required>{{ old('description_fr', $location->description_fr) }}</textarea>
             </div>
 
-            <!-- Background Image -->
+            <!-- Image Upload -->
             <div class="form-group">
-                <label for="background_image">Background Image *</label>
-                <input type="file" name="background_image" id="background_image">
-                @if ($location->background_image)
-                    <img src="{{ asset('storage/' . $location->background_image) }}" alt="Background Image"
-                        style="max-width: 200px; margin-top: 10px;">
-                @endif
+                <div class="form-text">
+                    <label for="background_image">Background Image *</label>
+                    <span>Upload an image</span>
+                </div>
+                <div class="form-control">
+                    <div class="upload-box" onclick="document.getElementById('background_image').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
+                        <!-- Add 'name' attribute here -->
+                        <input type="file" name="background_image" id="background_image">
+                    </div>
+
+                    <!-- Current Image Preview with Modal Trigger -->
+                    <div class="curr-image">
+                        @if ($location->featured_banner)
+                            <img src="{{ asset($location->featured_banner) }}" alt="Background Image"
+                                style="max-width: 200px; margin-top: 10px;" class="img-preview" data-bs-toggle="modal"
+                                data-bs-target="#imageModal">
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Main Image -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">Current Image</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{ asset($location->featured_banner) }}" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Email -->
@@ -185,6 +216,75 @@
     <style>
         .modal-backdrop {
             backdrop-filter: blur(5px);
+        }
+
+
+        .upload-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 147px;
+            gap: 10px;
+            width: 512px;
+            height: 125px;
+            background: #f6f9f9;
+            border: 1px dashed #d5d7da;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-box .text {
+            font-weight: 400;
+            font-size: 14px;
+            color: #969db2;
+        }
+
+        .upload-box .text span {
+            color: #02635c;
+            font-weight: 600;
+        }
+
+        .upload-box .subtext {
+            font-weight: 400;
+            font-size: 12px;
+            color: #969db2;
+        }
+
+        .upload-box .icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d5d7da;
+            filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
+            border-radius: 7px;
+        }
+
+        .upload-box .icon img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .section.form .form-control {
+            display: flex;
+            flex-direction: column;
+            padding: 0px 0px 20px;
+            gap: 12px;
+            width: 100%;
+            height: auto;
+            border: none;
+        }
+
+        .curr-image img {
+            width: 100px !important;
+            height: 100px !important;
         }
     </style>
 @endsection
