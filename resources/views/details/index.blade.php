@@ -16,7 +16,8 @@
         <div class="sub-header">
             <h2>Details</h2>
             <div class="form-actions">
-                <button class="btn-save">Add New</button>
+                <button class="btn-save" onclick="window.location.href='{{ route('details.create', ['id' => $id]) }}'">Add
+                    New</button>
             </div>
         </div>
     </div>
@@ -70,9 +71,11 @@
                                 </td>
                                 <td class="action-btn">
                                     <button class="edit-btn" data-tooltip="Edit">
-                                        <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit">
+                                        <img src="{{ asset('images/edit-icon.svg') }}" alt="Edit"
+                                            onclick="window.location='{{ route('details.edit', ['id' => $details->id]) }}';">
                                     </button>
-                                    <button class="view-btn" data-tooltip="View">
+                                    <button class="view-btn" data-tooltip="View"
+                                        onclick="window.location='{{ route('details.view', ['id' => $details->id]) }}';">
                                         <img src="{{ asset('images/view-icon.svg') }}" alt="View">
                                     </button>
                                 </td>

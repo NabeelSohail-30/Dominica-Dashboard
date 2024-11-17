@@ -53,6 +53,7 @@ class Details extends Model
         'geo_fencing',
         'achievement_ids',
         'gallery_status',
+        'vgallery_status',
         'nearby',
         'status',
         'booking_url',

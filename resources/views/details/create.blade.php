@@ -18,9 +18,235 @@
                 <span>Add Detail</span>
             </div>
             <div class="sub-header">
-                <h2>Listing</h2>
+                <h2>Add Detail</h2>
             </div>
         </div>
+
+        <form id="listingForm" action="{{ route('details.store', ['id' => $id]) }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+
+            <div class="main-form">
+                <!-- Text Fields -->
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" name="title" id="title" placeholder="e.g. Listing Title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="sub_title">Subtitle *</label>
+                    <input type="text" name="sub_title" id="sub_title" placeholder="e.g. Subtitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="push_welcome_title">Push Welcome Title *</label>
+                    <input type="text" name="push_welcome_title" id="push_welcome_title" placeholder="e.g. Welcome Title"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="push_body">Push Body *</label>
+                    <textarea name="push_body" id="push_body" placeholder="e.g. Push notification body" required></textarea>
+                </div>
+
+                <!-- Descriptions -->
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea name="description" id="description" placeholder="e.g. Description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="description_sp">Description (Spanish) *</label>
+                    <textarea name="description_sp" id="description_sp" placeholder="e.g. Descripción en Español" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="description_fr">Description (French) *</label>
+                    <textarea name="description_fr" id="description_fr" placeholder="e.g. Description en Français" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="description_2">Description 2</label>
+                    <textarea name="description_2" id="description_2" placeholder="e.g. Additional Description"></textarea>
+                </div>
+
+                <!-- Images -->
+                <div class="form-group">
+                    <label for="flag">Upload Flag (For Capital City) *</label>
+                    <div class="upload-box" onclick="document.getElementById('flag').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="flag" id="flag" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Upload Image | Icon | Thumbnail *</label>
+                    <div class="upload-box" onclick="document.getElementById('image').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="image" id="image" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bg_image">Background Image *</label>
+                    <div class="upload-box" onclick="document.getElementById('bg_image').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="bg_image" id="bg_image" required>
+                    </div>
+                </div>
+
+                <!-- Location Details -->
+                <div class="form-group">
+                    <label for="latitude">Latitude *</label>
+                    <input type="number" name="latitude" id="latitude" placeholder="e.g. 37.7749" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="longitude">Longitude *</label>
+                    <input type="number" name="longitude" id="longitude" placeholder="e.g. -122.4194" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="radius">Radius *</label>
+                    <input type="number" name="radius" id="radius" placeholder="e.g. 50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location *</label>
+                    <input type="text" name="location" id="location" placeholder="e.g. San Francisco" required>
+                </div>
+
+                <!-- Other Details -->
+                <div class="form-group">
+                    <label for="year">Year *</label>
+                    <input type="number" name="year" id="year" placeholder="e.g. 2024" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" name="date" id="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="day">Day *</label>
+                    <input type="text" name="day" id="day" placeholder="e.g. Monday" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="timing">Timing *</label>
+                    <input type="text" name="timing" id="timing" placeholder="e.g. 9:00 AM - 5:00 PM" required>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" name="email" id="email" placeholder="e.g. example@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="tel" name="phone" id="phone" placeholder="e.g. +123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsappNum">WhatsApp Number *</label>
+                    <input type="tel" name="whatsappNum" id="whatsappNum" placeholder="e.g. +123456789" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website *</label>
+                    <input type="url" name="website" id="website" placeholder="e.g. https://example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="video">Video *</label>
+                    <div class="upload-box" onclick="document.getElementById('video').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="video" id="video" required>
+                    </div>
+                </div>
+
+                <!-- Boolean Fields -->
+                <div class="form-group">
+                    <label for="geo_fencing">Geo Fencing</label>
+                    <select name="geo_fencing" id="geo_fencing" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <!-- Gallery Images -->
+                <div class="form-group">
+                    <label for="gallery_images">Gallery Images *</label>
+                    <select name="gallery_status" id="gallery_status" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <!-- Gallery Videos -->
+                <div class="form-group">
+                    <label for="gallery_videos">Gallery Videos *</label>
+                    <select name="vgallery_status" id="vgallery_status" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="has_trail">Has Trail</label>
+                    <select name="has_trail" id="has_trail" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="has_360">Has 360</label>
+                    <select name="has_360" id="has_360" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <!-- Links -->
+                <div class="form-group">
+                    <label for="booking_url">Booking URL *</label>
+                    <input type="url" name="booking_url" id="booking_url" placeholder="e.g. https://booking.com"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registration_link">Registration Link *</label>
+                    <input type="url" name="registration_link" id="registration_link"
+                        placeholder="e.g. https://register.com" required>
+                </div>
+            </div>
+
+            <!-- Error Messages -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <!-- Form Footer -->
+            <div class="form-footer">
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save</button>
+                    <button type="button" class="btn-cancel"
+                        onclick="window.location='{{ route('dashboard') }}'">Cancel</button>
+                </div>
+            </div>
+        </form>
     </div>
 @endsection
 

@@ -39,6 +39,13 @@ Route::get('/menus/listing/edit/{id}', [ListingController::class, 'edit'])->name
 Route::put('/menus/listing/update/{id}', [ListingController::class, 'update'])->name('listing.update')->middleware('auth');
 Route::put('/menus/listing/deactivate/{id}', [ListingController::class, 'deactivate'])->name('listing.deactivate')->middleware('auth');
 
+Route::get('details/{id}', [DetailsController::class, 'index'])->name('details.index')->middleware('auth');
+Route::get('details/create/{id}', [DetailsController::class, 'create'])->name('details.create')->middleware('auth');
+Route::post('details/store/{id}', [DetailsController::class, 'store'])->name('details.store')->middleware('auth');
+Route::get('details/view/{id}', [DetailsController::class, 'show'])->name('details.view')->middleware('auth');
+Route::get('details/edit/{id}', [DetailsController::class, 'edit'])->name('details.edit')->middleware('auth');
+Route::put('details/update/{id}', [DetailsController::class, 'update'])->name('details.update')->middleware('auth');
+
 Route::get('/weather/edit', [MenuController::class, 'edit_weather'])->name('weather.edit_weather')->middleware('auth');
 Route::post('/weather/update', [MenuController::class, 'update_weather'])->name('weather.update_weather')->middleware('auth');
 
@@ -69,6 +76,3 @@ Route::put('featured_location/{id}', [FeaturedLocation::class, 'update'])->name(
 
 Route::get('/hike', [HikeDetailsController::class, 'index'])->name('hike.index')->middleware('auth');
 Route::get('/hike/detail/{id}', [HikeDetailsController::class, 'detail'])->name('hike.detail')->middleware('auth');
-
-Route::get('details/{id}', [DetailsController::class, 'index'])->name('details.index')->middleware('auth');
-Route::get('details/create', [DetailsController::class, 'create'])->name('details.create')->middleware('auth');
