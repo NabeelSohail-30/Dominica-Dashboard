@@ -33,14 +33,14 @@
             </div>
             <div class="sidebar-main">
                 <div class="sidebar-main-head">
-                    <div class="search">
+                    {{-- <div class="search">
                         <div class="search-container">
                             <span class="search-icon"><img src="{{ asset('images/search-icon.svg') }}"
                                     alt=""></span>
                             <input type="text" placeholder="Search..." class="search-input">
                             <span class="search-shortcut">⌘K</span>
                         </div>
-                    </div>
+                    </div> --}}
                     <ul class="menu-list ">
                         <li class="menu-item" onclick="window.location='{{ route('dashboard') }}';"
                             style="cursor: pointer;">
@@ -54,11 +54,14 @@
                             style="cursor: pointer;">
                             <img src="{{ asset('images/feature-side-icon.svg') }}" alt=""> Featured Locations
                         </li>
-                        <li class="menu-item has-submenu">
-                            <img src="{{ asset('images/app-side-icon.svg') }}" alt=""> App Menus <span
-                                class="submenu-icon"><img src="{{ asset('images/caret-right.svg') }}"
-                                    alt=""></span>
-                        </li>
+
+                        {{-- <li class="menu-item has-submenu">
+                            <img src="{{ asset('images/app-side-icon.svg') }}" alt=""> App Menus
+                            <span class="submenu-icon">
+                                <img src="{{ asset('images/caret-right.svg') }}" alt="">
+                            </span>
+                        </li> --}}
+
                         <li class="menu-item" onclick="window.location='{{ route('about_us.edit') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> About Us
@@ -83,11 +86,15 @@
                 </div>
                 <div class="sidebar-main-foot">
                     <ul class="menu-list">
-                        <li class="menu-item">
+                        {{-- <li class="menu-item">
                             <img src="{{ asset('images/support-side-icon.svg') }}" alt=""> Support
                         </li>
                         <li class="menu-item">
                             <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Settings
+                        </li> --}}
+                        <li class="menu-item" onclick="window.location='{{ route('logout') }}';"
+                            style="cursor: pointer;">
+                            <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Logout
                         </li>
                     </ul>
                 </div>

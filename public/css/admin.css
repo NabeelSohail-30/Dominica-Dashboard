@@ -160,7 +160,7 @@ body {
     padding: 0px;
     gap: 20px;
     width: 295px;
-    height: 415px;
+    height: auto;
 }
 
 .sidebar-main .sidebar-main-foot {
@@ -170,7 +170,7 @@ body {
     padding: 0px;
     gap: 20px;
     width: 295px;
-    height: 80px;
+    height: auto;
 }
 
 .sidebar .sidebar-main {
@@ -290,4 +290,37 @@ body {
     margin-left: auto;
     font-size: 14px;
     color: #888;
+}
+
+.has-submenu {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    z-index: 10;
+}
+
+.submenu a {
+    display: block;
+    padding: 5px 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-item.has-submenu:hover .submenu {
+    display: block;
 }
