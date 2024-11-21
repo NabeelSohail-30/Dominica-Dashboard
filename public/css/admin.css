@@ -68,9 +68,9 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 16px 20px 17px;
+    padding: 20px 16px;
     gap: 10px;
-    width: 295px;
+    width: auto;
     height: 72px;
 }
 
@@ -101,7 +101,7 @@ body {
     padding: 15px 16px 23px;
     gap: 10px;
     margin: 0 auto;
-    width: 295px;
+    width: auto;
     height: 103px;
 }
 
@@ -323,4 +323,43 @@ body {
 
 .menu-item.has-submenu:hover .submenu {
     display: block;
+}
+
+@media (min-width: 1600px) {
+    .sidebar .sidebar-title {
+        padding: 20px 29px;
+        width: auto;
+    }
+}
+
+@media (min-width: 1800px) {
+    .sidebar .sidebar-title {
+        padding: 20px;
+        width: auto;
+    }
+
+    .sidebar {
+        width: 17%;
+    }
+
+    .sidebar .sidebar-main {
+        margin: 0px auto;
+        height: 100vh;
+    }
+}
+
+@media (min-width: 1920px) {
+    .sidebar .sidebar-main {
+        height: 100vh;
+        margin: 0px auto;
+    }
+
+    .sidebar {
+        width: 16%;
+    }
+
+    .sidebar .sidebar-title {
+        padding: 20px 24px;
+        width: auto;
+    }
 }
