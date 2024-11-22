@@ -75,7 +75,13 @@
             <!-- Background Image -->
             <div class="form-group">
                 <label for="background_image">Background Image *</label>
-                <input type="file" name="background_image" id="background_image" required>
+                <div class="upload-box" onclick="document.getElementById('background_image').click()">
+                    <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                    <div class="text"><span>Click to upload</span> or drag and drop</div>
+                    <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
+                    <!-- Add 'name' attribute here -->
+                    <input type="file" name="background_image" id="background_image" required>
+                </div>
             </div>
 
             <!-- Email -->
@@ -116,14 +122,14 @@
             <!-- Latitude -->
             <div class="form-group">
                 <label for="latitude">Latitude *</label>
-                <input type="number" step="0.000001" name="latitude" id="latitude" value="{{ old('latitude') }}"
+                <input type="number" name="latitude" id="latitude" value="{{ old('latitude') }}"
                     placeholder="e.g. 34.0522" required>
             </div>
 
             <!-- Longitude -->
             <div class="form-group">
                 <label for="longitude">Longitude *</label>
-                <input type="number" step="0.000001" name="longitude" id="longitude" value="{{ old('longitude') }}"
+                <input type="number" name="longitude" id="longitude" value="{{ old('longitude') }}"
                     placeholder="e.g. -118.2437" required>
             </div>
 
