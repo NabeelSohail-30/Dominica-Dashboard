@@ -15,7 +15,15 @@
                     <img src="{{ asset('images/sort-icon.svg') }}" alt="Sort Icon">
                 </a>
             </th>
-            <th>Expected Completion Time</th>
+            <th>Expected Completion Time <a href="javascript:void(0);" class="sortable"
+                    data-sort="expected_completion_datetime"
+                    data-order="{{ request('order') === 'asc' ? 'desc' : 'asc' }}">
+                    <img src="{{ asset('images/sort-icon.svg') }}" alt="Sort Icon">
+                </a></th>
+            <th>Estimated Start Date Time <a href="javascript:void(0);" class="sortable"
+                    data-sort="estimated_start_datetime" data-order="{{ request('order') === 'asc' ? 'desc' : 'asc' }}">
+                    <img src="{{ asset('images/sort-icon.svg') }}" alt="Sort Icon">
+                </a></th>
             <th>Phone Number</th>
             <th>Status</th>
             <th></th>
@@ -27,6 +35,7 @@
                 <td>{{ $registration->first_name }}</td>
                 <td>{{ $registration->last_name }}</td>
                 <td>{{ $registration->expected_completion_datetime }}</td>
+                <td>{{ $registration->estimated_start_datetime }}</td>
                 <td>{{ $registration->phone_number }}</td>
                 <td>{{ $registration->is_active ? 'Pending Hikes' : 'Completed Hikes' }}</td>
                 <td>
