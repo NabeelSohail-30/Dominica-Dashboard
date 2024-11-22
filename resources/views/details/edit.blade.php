@@ -316,6 +316,28 @@
             </div>
         </form>
     </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Validation Errors</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('custom_css')
@@ -328,6 +350,16 @@
         .table-section {
             margin-top: 120px;
             padding: 32px;
+        }
+
+        #errorModal .modal-body ul {
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+
+        #errorModal .modal-body ul li {
+            color: red;
+            font-size: 0.9em;
         }
     </style>
 @endsection
@@ -364,6 +396,13 @@
             videoModal.addEventListener('hidden.bs.modal', function() {
                 modalVideo.src = '';
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            @if ($errors->any())
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            @endif
         });
     </script>
 @endsection
