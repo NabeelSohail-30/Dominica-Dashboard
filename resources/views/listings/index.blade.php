@@ -74,14 +74,17 @@
                                         onclick="window.location='{{ route('details.index', ['id' => $listing->id]) }}';">
                                         <img src="{{ asset('images/view-icon.svg') }}" alt="View">
                                     </button>
-                                    <button class="btn" data-tooltip="Deactivate">
-                                        <form action="{{ route('listing.deactivate', ['id' => $listing->id]) }}"
-                                            method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="submit" value="Deactivate">
-                                        </form>
-                                    </button>
+                                    <!-- Activate/Deactivate Button -->
+                                    <form
+                                        action="{{ $listing->status ? route('listing.deactivate', ['id' => $listing->id]) : route('listing.activate', ['id' => $listing->id]) }}"
+                                        method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit"
+                                            class="{{ $listing->status ? 'deactivate-btn' : 'activate-btn' }}">
+                                            {{ $listing->status ? 'Deactivate' : 'Activate' }}
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -127,6 +130,27 @@
             padding: 0px;
             gap: 12px;
             width: auto;
+        }
+
+        .action-btn form {
+            width: 120px !important;
+        }
+
+        .action-btn form button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 8px;
+            background: #156c66;
+            border: 1px solid #156c66;
+            box-shadow: 0px 1px 2px rgba(10, 13, 18, 0.05);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
         }
     </style>
 @endsection

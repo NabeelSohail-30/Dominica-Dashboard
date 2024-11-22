@@ -135,4 +135,19 @@ class ListingController extends Controller
         // Redirect with a success message
         return redirect()->route('dashboard')->with('success', 'Listing Deactivated successfully!');
     }
+
+    public function activate(Request $request, $id)
+    {
+        // Find the listing by ID
+        $listing = Listing::findOrFail($id);
+
+        // Update fields based on request data
+        $listing->status = '1';
+
+        // Save the updated listing
+        $listing->save();
+
+        // Redirect with a success message
+        return redirect()->route('dashboard')->with('success', 'Listing Activated successfully!');
+    }
 }

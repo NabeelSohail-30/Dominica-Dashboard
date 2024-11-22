@@ -38,6 +38,7 @@ Route::post('/menus/listing/store/{id}', [ListingController::class, 'store'])->n
 Route::get('/menus/listing/edit/{id}', [ListingController::class, 'edit'])->name('listing.edit')->middleware('auth');
 Route::put('/menus/listing/update/{id}', [ListingController::class, 'update'])->name('listing.update')->middleware('auth');
 Route::put('/menus/listing/deactivate/{id}', [ListingController::class, 'deactivate'])->name('listing.deactivate')->middleware('auth');
+Route::put('/menus/listing/activate/{id}', [ListingController::class, 'activate'])->name('listing.activate')->middleware('auth');
 
 Route::get('details/{id}', [DetailsController::class, 'index'])->name('details.index')->middleware('auth');
 Route::get('details/create/{id}', [DetailsController::class, 'create'])->name('details.create')->middleware('auth');
