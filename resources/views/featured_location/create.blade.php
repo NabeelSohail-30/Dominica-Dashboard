@@ -7,7 +7,9 @@
         <div class="bread-crumb">
             <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-            <span>Featured Location</span>
+            <span>
+                <a onclick="goBack();" style="cursor: pointer;">Featured Location</a>
+            </span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
             <span>Add New Location</span>
         </div>
@@ -258,5 +260,13 @@
                 errorModal.show();
             @endif
         });
+
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the referrer
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard if no referrer
+            }
+        }
     </script>
 @endsection

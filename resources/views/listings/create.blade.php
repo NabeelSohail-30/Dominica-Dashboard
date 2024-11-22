@@ -9,9 +9,11 @@
                 <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}"
                             alt="Home"></a></span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Menu</span>
+                <span>
+                    <a onclick="goBack();" style="cursor: pointer;">Listing</a>
+                </span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Listing</span>
+                <span>Add Listing</span>
             </div>
             <div class="sub-header">
                 <h2>Listing</h2>
@@ -132,5 +134,13 @@
                 errorModal.show();
             @endif
         });
+
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the referrer
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard if no referrer
+            }
+        }
     </script>
 @endsection

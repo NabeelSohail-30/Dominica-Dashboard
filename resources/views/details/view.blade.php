@@ -6,14 +6,19 @@
     <div class="container">
         <div class="form-header">
             <div class="bread-crumb">
-                <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}"
-                            alt="Home"></a></span>
+                <span>
+                    <a href="{{ route('dashboard') }}">
+                        <img src="{{ asset('images/home-icon.svg') }}" alt="Home">
+                    </a>
+                </span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Menu</span>
+                <span>
+                    <a onclick="goBackBack();" style="cursor: pointer;">Listing</a>
+                </span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Listing</span>
-                <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-                <span>Details</span>
+                <span>
+                    <a onclick="goBack();" style="cursor: pointer;">Details</a>
+                </span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
                 <span>View Details</span>
             </div>
@@ -21,6 +26,7 @@
                 <h2>View Details</h2>
             </div>
         </div>
+
 
         <div class="main-form">
             <!-- Text Fields -->
@@ -304,5 +310,22 @@
                 modalVideo.src = '';
             });
         });
+
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the previous page
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard
+            }
+        }
+
+        function goBackBack() {
+            // If history exists, go back two steps
+            if (window.history.length > 2) {
+                window.history.go(-2); // Navigate back two steps
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard
+            }
+        }
     </script>
 @endsection

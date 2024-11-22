@@ -7,7 +7,15 @@
         @csrf
 
         <div class="form-header">
-            <h2>Weather</h2>
+            <div class="bread-crumb">
+                <span><a onclick="window.location='{{ route('dashboard') }}';" style="cursor: pointer"><img
+                            src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
+                <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
+                <span>Weather</span>
+            </div>
+            <div class="sub-header">
+                <h2>Weather</h2>
+            </div>
         </div>
 
         <div class="main-form">
@@ -158,6 +166,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/edit_menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+
     <style>
         /* CSS to blur background when modal is open */
         .modal-backdrop {
@@ -204,5 +214,13 @@
                 errorModal.show();
             @endif
         });
+
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the referrer
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard if no referrer
+            }
+        }
     </script>
 @endsection

@@ -9,6 +9,10 @@
                 <span><a onclick="window.location='{{ route('dashboard') }}';" style="cursor: pointer"><img
                             src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
                 <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
+                <span>
+                    <a onclick="goBack();" style="cursor: pointer;">Achievements</a>
+                </span>
+                <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
                 <span>Edit Achievement</span>
             </div>
             <div class="sub-header">
@@ -110,8 +114,8 @@
                         <!-- Current Image Preview with Modal Trigger -->
                         <div class="curr-image">
                             @if ($achievement->achievement_image_bw)
-                                <img src="{{ asset($achievement->achievement_image_bw) }}" alt="{{ $achievement->title }}"
-                                    class="img-preview"
+                                <img src="{{ asset($achievement->achievement_image_bw) }}"
+                                    alt="{{ $achievement->title }}" class="img-preview"
                                     onclick="showImageModal('{{ asset($achievement->achievement_image_bw) }}')"
                                     style="cursor:pointer;">
                             @endif
@@ -256,5 +260,13 @@
                 errorModal.show();
             @endif
         });
+
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the referrer
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard if no referrer
+            }
+        }
     </script>
 @endsection

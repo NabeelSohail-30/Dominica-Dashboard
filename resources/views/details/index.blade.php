@@ -7,10 +7,9 @@
         <div class="bread-crumb">
             <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-            <span>Menu</span>
-            <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-            <span>Listing</span>
-            <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
+            <span>
+                <a onclick="goBack();" style="cursor: pointer;">Listing</a>
+            </span> <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
             <span>Details</span>
         </div>
         <div class="sub-header">
@@ -135,4 +134,13 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the previous page
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard
+            }
+        }
+    </script>
 @endsection

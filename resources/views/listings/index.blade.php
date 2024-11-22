@@ -7,8 +7,6 @@
         <div class="bread-crumb">
             <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-            <span>Menu</span>
-            <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
             <span>Listing</span>
         </div>
         <div class="sub-header">

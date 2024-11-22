@@ -7,7 +7,9 @@
         <div class="bread-crumb">
             <span><a href="{{ route('dashboard') }}"><img src="{{ asset('images/home-icon.svg') }}" alt="Home"></a></span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
-            <span>Hike Details</span>
+            <span>
+                <a onclick="goBack();" style="cursor: pointer;">Hike Details</a>
+            </span>
             <span><img src="{{ asset('images/forward-icon.svg') }}" alt=""></span>
             <span>Hike Location Tracking</span>
         </div>
@@ -125,4 +127,13 @@
 @section('custom_js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function goBack() {
+            if (document.referrer) {
+                window.location = document.referrer; // Navigate to the referrer
+            } else {
+                window.location = '{{ route('dashboard') }}'; // Fallback to dashboard if no referrer
+            }
+        }
+    </script>
 @endsection
