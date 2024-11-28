@@ -11,6 +11,22 @@
         </div>
         <div class="sub-header">
             <h2>Hike Details</h2>
+            <div class="status-tabs">
+                <ul class="nav nav-tabs">
+                    <li class="tab active">
+                        <img src="{{ asset('images/overdue.png') }}" alt="">
+                        <a data-status="overdue" href="javascript:void(0);">Overdue</a>
+                    </li>
+                    <li class="tab">
+                        <img src="{{ asset('images/pending.png') }}" alt="">
+                        <a data-status="ongoing" href="javascript:void(0);">Pending</a>
+                    </li>
+                    <li class="tab">
+                        <img src="{{ asset('images/completed.png') }}" alt="">
+                        <a data-status="completed" href="javascript:void(0);">Completed</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -29,9 +45,10 @@
             </div>
         </div>
 
-        <div class="table-container" id="table-container">
+        <div id="table-container">
             @include('partials.hike_table', ['registrations' => $registrations])
         </div>
+
     </div>
 @endsection
 
@@ -45,6 +62,10 @@
             backdrop-filter: blur(5px);
         }
 
+        #table-container {
+            width: 100%
+        }
+
         .table-section {
             margin-top: 120px;
             padding: 32px;
@@ -53,6 +74,42 @@
         .pagination-section {
             margin-top: 15px;
         }
+
+        .form-header .sub-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0px;
+            width: 80%;
+            gap: 28px;
+        }
+
+        .status-tabs .tab {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            gap: 8px;
+            width: auto;
+            height: auto;
+        }
+
+        .status-tabs .tab a {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            color: #535862;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .status-tabs .tab.active {
+            background-color: transparent;
+            border-bottom: 2px solid #414651;
+        }
     </style>
 @endsection
 
@@ -60,8 +117,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // AJAX setup for loading table data
-        function loadTable(page = 1) {
+        function loadTable(page = 1, status = 'overdue') {
             $.ajax({
                 url: "{{ route('hike.index') }}",
                 type: "GET",
@@ -70,6 +126,7 @@
                     sort: "{{ request('sort', 'first_name') }}",
                     order: "{{ request('order', 'asc') }}",
                     entriesPerPage: $('#entriesPerPage').val(),
+                    status: status, // Pass the status to the server
                     page: page // Include the page parameter for pagination
                 },
                 success: function(response) {
@@ -77,6 +134,19 @@
                 }
             });
         }
+
+        $('.tab a').on('click', function() {
+            $('.tab').removeClass('active'); // Adjusted to target the parent `.tab`
+            $(this).parent().addClass('active'); // Add active class to the clicked tab
+            const status = $(this).data('status');
+            loadTable(1, status);
+        });
+
+
+        // Trigger initial load with 'ongoing' status
+        $(document).ready(function() {
+            loadTable();
+        });
 
         // Event listeners for search, pagination, and sorting
         $('#search').on('keyup', function() {

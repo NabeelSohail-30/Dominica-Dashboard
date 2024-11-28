@@ -25,7 +25,6 @@
                     <img src="{{ asset('images/sort-icon.svg') }}" alt="Sort Icon">
                 </a></th>
             <th>Phone Number</th>
-            <th>Status</th>
             <th></th>
         </tr>
     </thead>
@@ -37,7 +36,6 @@
                 <td>{{ $registration->expected_completion_datetime }}</td>
                 <td>{{ $registration->estimated_start_datetime }}</td>
                 <td>{{ $registration->phone_number }}</td>
-                <td>{{ $registration->is_active ? 'Pending Hikes' : 'Completed Hikes' }}</td>
                 <td>
                     <button class="view-btn" data-tooltip="View"
                         onclick="window.location.href='{{ route('hike.detail', ['id' => $registration->id]) }}'">

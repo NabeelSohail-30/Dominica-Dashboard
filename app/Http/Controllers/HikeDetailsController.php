@@ -11,13 +11,30 @@ class HikeDetailsController extends Controller
     {
         $query = HikeDetails::query();
 
+        // Filter based on status
+        if ($request->has('status')) {
+            $status = $request->status;
+
+            if ($status === 'ongoing') {
+                $query->where('is_active', 1)
+                    ->where('expected_completion_datetime', '>=', now());
+            } elseif ($status === 'overdue') {
+                $query->where('is_active', 1)
+                    ->where('expected_completion_datetime', '<', now());
+            } elseif ($status === 'completed') {
+                $query->where('is_active', 0);
+            }
+        }
+
         // Search functionality
         if ($request->has('search') && !empty($request->search)) {
-            $query->where('first_name', 'like', '%' . $request->search . '%')
-                ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                ->orWhere('is_active', 'like', '%' . $request->search . '%')
-                ->orWhere('expected_completion_datetime', 'like', '%' . $request->search . '%')
-                ->orWhere('phone_number', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('is_active', 'like', '%' . $request->search . '%')
+                    ->orWhere('expected_completion_datetime', 'like', '%' . $request->search . '%')
+                    ->orWhere('phone_number', 'like', '%' . $request->search . '%');
+            });
         }
 
         // Sorting functionality
