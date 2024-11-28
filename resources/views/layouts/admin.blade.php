@@ -55,12 +55,43 @@
                             <img src="{{ asset('images/feature-side-icon.svg') }}" alt=""> Featured Locations
                         </li>
 
-                        {{-- <li class="menu-item has-submenu">
+                        <!-- App Menus with Submenu -->
+                        <li class="menu-item has-submenu">
                             <img src="{{ asset('images/app-side-icon.svg') }}" alt=""> App Menus
                             <span class="submenu-icon">
                                 <img src="{{ asset('images/caret-right.svg') }}" alt="">
                             </span>
-                        </li> --}}
+                            <div class="submenu">
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(1)) }}">About Us</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(2)) }}">Explore Dominica</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(3)) }}">Aqua Tourism Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(4)) }}">Must See Sites</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(5)) }}">Weather</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(6)) }}">Events Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(7)) }}">Small Tourism
+                                    Enterprises</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(8)) }}">Emergency Number</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(9)) }}">Aerial Views</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(10)) }}">Plan Your Hike</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(11)) }}">Guides/Tour Guides</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(12)) }}">Restaurants</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(13)) }}">Walking Tour</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(15)) }}">Adventure Tourism
+                                    Pillar.</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(16)) }}">Local Businesses</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(17)) }}">Lodging</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(19)) }}">Health and Wellness
+                                    Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(21)) }}">How to get here</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(22)) }}">How to move here</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(23)) }}">Agro Tourism Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(24)) }}">Kalinago Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(25)) }}">Romance Pillar</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(26)) }}">Aerial Views</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(27)) }}">Waitukubuli Trail</a>
+                                <a href="{{ url('/admin/edit_menu/' . base64_encode(28)) }}">Places of Interest</a>
+                            </div>
+                        </li>
 
                         <li class="menu-item" onclick="window.location='{{ route('about_us.edit') }}';"
                             style="cursor: pointer;">
@@ -74,8 +105,8 @@
                             style="cursor: pointer;">
                             <img src="{{ asset('images/weather-side-icon.svg') }}" alt=""> Weather
                         </li>
-                        <li class="menu-item has-submenu"
-                            onclick="window.location='{{ route('achievements.index') }}';" style="cursor: pointer;">
+                        <li class="menu-item" onclick="window.location='{{ route('achievements.index') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/achivement-side-icon.svg') }}" alt=""> Achievements
                         </li>
                         <li class="menu-item" onclick="window.location='{{ route('push_notifications.index') }}';"
