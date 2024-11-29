@@ -67,26 +67,31 @@
                 <!-- Color Image -->
                 <div class="form-group">
                     <label for="achievement_image_color">Color Image *</label>
-                    <div class="upload-box" onclick="document.getElementById('achievement_image_color').click()">
+                    <div class="upload-box" id="color-image-drop-area"
+                        onclick="document.getElementById('achievement_image_color').click()"
+                        ondragover="handleDragOver(event)" ondrop="handleFileDrop(event, 'achievement_image_color')">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
                         <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
-                        <!-- Add 'name' attribute here -->
                         <input type="file" name="achievement_image_color" id="achievement_image_color" required>
                     </div>
+                    <div id="color-image-preview" class="image-preview"></div> <!-- For previewing the uploaded file -->
                 </div>
 
                 <!-- Black & White Image -->
                 <div class="form-group">
                     <label for="achievement_image_bw">B&W Image *</label>
-                    <div class="upload-box" onclick="document.getElementById('achievement_image_bw').click()">
+                    <div class="upload-box" id="bw-image-drop-area"
+                        onclick="document.getElementById('achievement_image_bw').click()" ondragover="handleDragOver(event)"
+                        ondrop="handleFileDrop(event, 'achievement_image_bw')">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
                         <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
-                        <!-- Add 'name' attribute here -->
                         <input type="file" name="achievement_image_bw" id="achievement_image_bw" required>
                     </div>
+                    <div id="bw-image-preview" class="image-preview"></div> <!-- For previewing the uploaded file -->
                 </div>
+
 
                 <!-- Manual -->
                 <div class="form-group">
@@ -180,6 +185,19 @@
             color: red;
             font-size: 0.9em;
         }
+
+        .upload-box.dragging {
+            border-color: #007bff;
+            background-color: #e9f5ff;
+        }
+
+        .image-preview img {
+            margin-top: 10px;
+            max-height: 150px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+        }
     </style>
 @endsection
 
@@ -188,6 +206,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Prevent default behavior for drag events
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.classList.add('dragging'); // Add a visual effect (optional)
+        }
+
+        // Handle the drop event
+        function handleFileDrop(event, inputId) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.classList.remove('dragging'); // Remove visual effect
+
+            const inputFile = document.getElementById(inputId);
+            const files = event.dataTransfer.files;
+
+            if (files.length > 0) {
+                inputFile.files = files; // Assign dropped files to the file input
+
+                // Optionally, preview the uploaded file
+                const previewId = inputId === 'achievement_image_color' ? 'color-image-preview' : 'bw-image-preview';
+                previewFile(files[0], previewId);
+            }
+        }
+
+        // Preview uploaded image
+        function previewFile(file, previewId) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewContainer = document.getElementById(previewId);
+                previewContainer.innerHTML =
+                    `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; height: auto;">`;
+            };
+            reader.readAsDataURL(file);
+        }
+
         $(document).ready(function() {
             // Show success modal if success message exists
             @if (session('success'))
