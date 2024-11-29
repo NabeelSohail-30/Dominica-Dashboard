@@ -31,10 +31,27 @@ class AboutUsController extends Controller
             'linkedin_url' => 'nullable|url',
         ]);
 
-        // Handle the image upload if there's a new image
         if ($request->hasFile('about_image')) {
-            $imagePath = $request->file('about_image')->store('images', 'public');
-            $aboutUs->about_image = $imagePath;
+            $file = $request->file('about_image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+
+            // Log details for debugging
+            \Log::info('File uploaded:', [
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+            ]);
+
+            // Save the file
+            $uploadPath = public_path('uploads/images');
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+
+            $file->move($uploadPath, $filename);
+            $aboutUs->about_image = "uploads/images/$filename"; // Save relative path
+
+            \Log::info('File moved to:', ['path' => $uploadPath . '/' . $filename]);
         }
 
         // Update the rest of the fields

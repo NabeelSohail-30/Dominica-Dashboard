@@ -177,6 +177,11 @@
             color: red;
             font-size: 0.9em;
         }
+
+        .upload-box.drag-over {
+            border: 2px dashed #007bff;
+            background-color: #f8f9fa;
+        }
     </style>
 @endsection
 
@@ -190,6 +195,35 @@
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
                 errorModal.show();
             @endif
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const uploadBox = document.querySelector(".upload-box");
+            const fileInput = document.getElementById("about_image");
+
+            uploadBox.addEventListener("dragover", (event) => {
+                event.preventDefault(); // Prevent the default behavior
+                uploadBox.classList.add("drag-over");
+            });
+
+            uploadBox.addEventListener("dragleave", () => {
+                uploadBox.classList.remove("drag-over");
+            });
+
+            uploadBox.addEventListener("drop", (event) => {
+                event.preventDefault(); // Prevent the default behavior
+                uploadBox.classList.remove("drag-over");
+
+                const files = event.dataTransfer.files; // Get dropped files
+                if (files.length > 0) {
+                    fileInput.files = files; // Assign files to the input
+                    // Optional: Trigger any file preview or validation logic here
+                }
+            });
+
+            uploadBox.addEventListener("click", () => {
+                fileInput.click(); // Simulate click to open file dialog
+            });
         });
     </script>
 @endsection
