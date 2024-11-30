@@ -160,6 +160,8 @@ class FeaturedLocation extends Controller
         // Retrieve the existing Details record
         $details = Details::findOrFail($id);
 
+        $backgroundImagePath = '';
+
         // Handle background image upload if provided
         if ($request->hasFile('background_image')) {
             // Delete the old background image if exists
