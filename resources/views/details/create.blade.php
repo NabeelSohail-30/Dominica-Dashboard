@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- Images -->
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="flag">Upload Flag (For Capital City) *</label>
                     <div class="upload-box" onclick="document.getElementById('flag').click()">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
@@ -97,6 +97,33 @@
                 <div class="form-group">
                     <label for="bg_image">Background Image *</label>
                     <div class="upload-box" onclick="document.getElementById('bg_image').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="bg_image" id="bg_image" required>
+                    </div>
+                </div> --}}
+
+                <div class="form-group">
+                    <label for="flag">Upload Flag (For Capital City) *</label>
+                    <div class="upload-box" id="upload-box-flag">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="flag" id="flag" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Upload Image | Icon | Thumbnail *</label>
+                    <div class="upload-box" id="upload-box-image">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="image" id="image" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bg_image">Background Image *</label>
+                    <div class="upload-box" id="upload-box-bg_image">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
                         <input type="file" name="bg_image" id="bg_image" required>
@@ -166,9 +193,18 @@
                     <input type="url" name="website" id="website" placeholder="e.g. https://example.com" required>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="video">Video *</label>
                     <div class="upload-box" onclick="document.getElementById('video').click()">
+                        <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
+                        <div class="text"><span>Click to upload</span> or drag and drop</div>
+                        <input type="file" name="video" id="video" required>
+                    </div>
+                </div> --}}
+
+                <div class="form-group">
+                    <label for="video">Video *</label>
+                    <div class="upload-box" id="upload-box-video">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
                         <input type="file" name="video" id="video" required>
@@ -299,6 +335,19 @@
             color: red;
             font-size: 0.9em;
         }
+
+        .upload-box.drag-over {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+        }
+
+        .upload-box .icon {
+            margin-bottom: 10px;
+        }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
     </style>
 @endsection
 
@@ -311,6 +360,43 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Add drag-and-drop functionality
+        document.querySelectorAll('.upload-box').forEach(box => {
+            const input = box.querySelector('input[type="file"]');
+
+            // Handle drag events
+            box.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                box.classList.add('drag-over');
+            });
+
+            box.addEventListener('dragleave', () => {
+                box.classList.remove('drag-over');
+            });
+
+            box.addEventListener('drop', (e) => {
+                e.preventDefault();
+                box.classList.remove('drag-over');
+
+                if (e.dataTransfer.files.length) {
+                    input.files = e.dataTransfer.files;
+                    box.querySelector('.text').textContent =
+                        `File selected: ${e.dataTransfer.files[0].name}`;
+                }
+            });
+
+            // Handle file selection via click
+            box.addEventListener('click', () => {
+                input.click();
+            });
+
+            input.addEventListener('change', () => {
+                if (input.files.length) {
+                    box.querySelector('.text').textContent = `File selected: ${input.files[0].name}`;
+                }
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             @if ($errors->any())
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));

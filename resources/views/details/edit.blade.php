@@ -81,10 +81,10 @@
                 <!-- Images -->
                 <div class="form-group">
                     <label for="flag">Upload Flag (For Capital City) *</label>
-                    <div class="upload-box" onclick="document.getElementById('flag').click()">
+                    <div class="upload-box" onclick="document.getElementById('flag').click()" data-input-id="flag">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
-                        <input type="file" name="flag" id="flag" required>
+                        <input type="file" name="flag" id="flag">
                     </div>
                     <div class="curr-image">
                         @if ($details->flag)
@@ -97,10 +97,10 @@
 
                 <div class="form-group">
                     <label for="image">Upload Image | Icon | Thumbnail *</label>
-                    <div class="upload-box" onclick="document.getElementById('image').click()">
+                    <div class="upload-box" onclick="document.getElementById('image').click()" data-input-id="image">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
-                        <input type="file" name="image" id="image" required>
+                        <input type="file" name="image" id="image">
                     </div>
                     <div class="curr-image">
                         @if ($details->image)
@@ -113,10 +113,11 @@
 
                 <div class="form-group">
                     <label for="bg_image">Background Image *</label>
-                    <div class="upload-box" onclick="document.getElementById('bg_image').click()">
+                    <div class="upload-box" onclick="document.getElementById('bg_image').click()"
+                        data-input-id="bg_image">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
-                        <input type="file" name="bg_image" id="bg_image" required>
+                        <input type="file" name="bg_image" id="bg_image">
                     </div>
                     <div class="curr-image">
                         @if ($details->bg_image)
@@ -203,10 +204,10 @@
 
                 <div class="form-group">
                     <label for="video">Video *</label>
-                    <div class="upload-box" onclick="document.getElementById('video').click()">
+                    <div class="upload-box" onclick="document.getElementById('video').click()" data-input-id="video">
                         <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                         <div class="text"><span>Click to upload</span> or drag and drop</div>
-                        <input type="file" name="video" id="video" required>
+                        <input type="file" name="video" id="video">
                     </div>
                     <div class="curr-image">
                         @if ($details->video)
@@ -366,6 +367,11 @@
             color: red;
             font-size: 0.9em;
         }
+
+        .upload-box.drag-over {
+            background-color: #f0f8ff;
+            border-color: #007bff;
+        }
     </style>
 @endsection
 
@@ -378,6 +384,41 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadBoxes = document.querySelectorAll('.upload-box');
+
+            uploadBoxes.forEach(box => {
+                const inputId = box.getAttribute('data-input-id');
+                const fileInput = document.getElementById(inputId);
+
+                // Handle click event
+                box.addEventListener('click', () => fileInput.click());
+
+                // Handle drag-and-drop
+                box.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    box.classList.add('drag-over');
+                });
+
+                box.addEventListener('dragleave', () => {
+                    box.classList.remove('drag-over');
+                });
+
+                box.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    box.classList.remove('drag-over');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        fileInput.files = files; // Assign files to the input
+                    }
+                });
+
+                // File input change event
+                fileInput.addEventListener('change', () => handlePreview(fileInput, box));
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             // Handle Image Modal
             const imageModal = document.getElementById('imageModal');
