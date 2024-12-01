@@ -14,15 +14,15 @@
             <div class="status-tabs">
                 <ul class="nav nav-tabs">
                     <li class="tab active">
-                        <img src="{{ asset('images/overdue.png') }}" alt="">
+                        <img src="{{ asset('images/overdue.svg') }}" alt="">
                         <a data-status="overdue" href="javascript:void(0);">Overdue</a>
                     </li>
                     <li class="tab">
-                        <img src="{{ asset('images/pending.png') }}" alt="">
+                        <img src="{{ asset('images/pending.svg') }}" alt="">
                         <a data-status="ongoing" href="javascript:void(0);">Pending</a>
                     </li>
                     <li class="tab">
-                        <img src="{{ asset('images/completed.png') }}" alt="">
+                        <img src="{{ asset('images/completed.svg') }}" alt="">
                         <a data-status="completed" href="javascript:void(0);">Completed</a>
                     </li>
                 </ul>

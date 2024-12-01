@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inter";
 }
 
 body {
@@ -349,6 +350,12 @@ body {
     display: block;
 }
 
+.is-active {
+    background-color: #f0f0f0; /* Highlight color */
+    font-weight: bold; /* Optional for emphasis */
+    border-left: 4px solid #156c66; /* Optional for visual cue */
+}
+
 @media (min-width: 1600px) {
     .sidebar .sidebar-title {
         padding: 20px 29px;
@@ -370,6 +377,11 @@ body {
         margin: 0px auto;
         height: 100vh;
     }
+
+    .main {
+        width: 100%;
+        margin-left: 17%;
+    }
 }
 
 @media (min-width: 1920px) {
@@ -385,5 +397,10 @@ body {
     .sidebar .sidebar-title {
         padding: 20px 24px;
         width: auto;
+    }
+
+    .main {
+        width: 100%;
+        margin-left: 16%;
     }
 }

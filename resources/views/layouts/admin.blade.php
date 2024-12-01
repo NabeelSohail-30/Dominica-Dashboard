@@ -42,21 +42,22 @@
                         </div>
                     </div> --}}
                     <ul class="menu-list ">
-                        <li class="menu-item" onclick="window.location='{{ route('dashboard') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('dashboard') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('dashboard') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/home-line.svg') }}" alt=""> Dashboard
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('hike.index') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('hike.index') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('hike.index') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/hike-icon.svg') }}" alt=""> Hike Details
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('featured_location.index') }}';"
+                        <li class="menu-item {{ request()->routeIs('featured_location.index') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('featured_location.index') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/feature-side-icon.svg') }}" alt=""> Featured Locations
                         </li>
 
                         <!-- App Menus with Submenu -->
-                        <li class="menu-item has-submenu">
+                        <li class="menu-item has-submenu {{ request()->is('admin/edit_menu/*') ? 'is-active' : '' }}">
                             <img src="{{ asset('images/app-side-icon.svg') }}" alt=""> App Menus
                             <span class="submenu-icon">
                                 <img src="{{ asset('images/caret-right.svg') }}" alt="">
@@ -93,23 +94,24 @@
                             </div>
                         </li>
 
-                        <li class="menu-item" onclick="window.location='{{ route('about_us.edit') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('about_us.edit') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('about_us.edit') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> About Us
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('ratings.index') }}';"
-                            style="cursor: pointer;">
-                            <img src="{{ asset('images/about-side-icon.svg') }}" alt=""> All Comments
+                        <li class="menu-item {{ request()->routeIs('ratings.index') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('ratings.index') }}';" style="cursor: pointer;">
+                            <img src="{{ asset('images/Comments.svg') }}" alt=""> All Comments
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('weather.edit_weather') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('weather.edit_weather') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('weather.edit_weather') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/weather-side-icon.svg') }}" alt=""> Weather
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('achievements.index') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('achievements.index') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('achievements.index') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/achivement-side-icon.svg') }}" alt=""> Achievements
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('push_notifications.index') }}';"
+                        <li class="menu-item {{ request()->routeIs('push_notifications.index') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('push_notifications.index') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/push-side-icon.svg') }}" alt=""> Push Notifications
                         </li>
@@ -120,12 +122,13 @@
                         {{-- <li class="menu-item">
                             <img src="{{ asset('images/support-side-icon.svg') }}" alt=""> Support
                         </li> --}}
-                        <li class="menu-item" onclick="window.location='{{ route('password.change.view') }}';"
+                        <li class="menu-item {{ request()->routeIs('password.change.view') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('password.change.view') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Settings
                         </li>
-                        <li class="menu-item" onclick="window.location='{{ route('logout') }}';"
-                            style="cursor: pointer;">
+                        <li class="menu-item {{ request()->routeIs('logout') ? 'is-active' : '' }}"
+                            onclick="window.location='{{ route('logout') }}';" style="cursor: pointer;">
                             <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Logout
                         </li>
                     </ul>
