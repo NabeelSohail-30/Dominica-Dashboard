@@ -53,7 +53,7 @@
                         <span>Upload an image</span>
                     </div>
                     <div class="form-control">
-                        <div class="upload-box" onclick="document.getElementById('image').click()">
+                        <div class="upload-box" onclick="document.getElementById('image').click()" data-input-id="image">
                             <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                             <div class="text"><span>Click to upload</span> or drag and drop</div>
                             <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
@@ -78,7 +78,8 @@
                         <span>Upload a background image</span>
                     </div>
                     <div class="form-control">
-                        <div class="upload-box" onclick="document.getElementById('bg_image').click()">
+                        <div class="upload-box" onclick="document.getElementById('bg_image').click()"
+                            data-input-id="bg_image">
                             <div class="icon"><img src="{{ asset('images/upload-cloud.svg') }}" alt=""></div>
                             <div class="text"><span>Click to upload</span> or drag and drop</div>
                             <div class="subtext">Supports: PNG, JPG, JPEG, WEBP</div>
@@ -200,6 +201,11 @@
             color: red;
             font-size: 0.9em;
         }
+
+        .upload-box.drag-over {
+            background-color: #f0f8ff;
+            border-color: #007bff;
+        }
     </style>
 @endsection
 
@@ -208,6 +214,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadBoxes = document.querySelectorAll('.upload-box');
+
+            uploadBoxes.forEach(box => {
+                const inputId = box.getAttribute('data-input-id');
+                const fileInput = document.getElementById(inputId);
+
+                // Handle click event
+                box.addEventListener('click', () => fileInput.click());
+
+                // Handle drag-and-drop
+                box.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    box.classList.add('drag-over');
+                });
+
+                box.addEventListener('dragleave', () => {
+                    box.classList.remove('drag-over');
+                });
+
+                box.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    box.classList.remove('drag-over');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        fileInput.files = files; // Assign files to the input
+                    }
+                });
+
+                // File input change event
+                fileInput.addEventListener('change', () => handlePreview(fileInput, box));
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             @if ($errors->any())
                 var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
