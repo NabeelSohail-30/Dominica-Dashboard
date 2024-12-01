@@ -117,12 +117,13 @@
                 </div>
                 <div class="sidebar-main-foot">
                     <ul class="menu-list">
-                        {{-- <li class="menu-item">
+                        <li class="menu-item">
                             <img src="{{ asset('images/support-side-icon.svg') }}" alt=""> Support
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" onclick="window.location='{{ route('password.change.view') }}';"
+                            style="cursor: pointer;">
                             <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Settings
-                        </li> --}}
+                        </li>
                         <li class="menu-item" onclick="window.location='{{ route('logout') }}';"
                             style="cursor: pointer;">
                             <img src="{{ asset('images/setting-side-icon.svg') }}" alt=""> Logout

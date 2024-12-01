@@ -11,6 +11,7 @@ use App\Http\Controllers\AchivementController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\FeaturedLocation;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 
 Auth::routes();
 
@@ -24,6 +25,12 @@ Route::get('/logout', function () {
     return redirect('/login');  // Redirect to the login page
 })->name('logout');
 
+// routes/web.php
+Auth::routes(['reset' => true]); // Ensure reset functionality is enabled
+Route::post('/password/change', [ChangePasswordController::class, 'changePassword'])->name('password.change');
+Route::get('/password/change', function () {
+    return view('auth.passwords.reset');
+})->name('password.change.view');
 
 Route::get('/dashboard', [MenuController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/menus/search', [MenuController::class, 'search'])->name('menu.search');
