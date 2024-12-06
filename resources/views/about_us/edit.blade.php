@@ -226,4 +226,58 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const title = document.getElementById('title');
+            const description = document.getElementById('description');
+            const image = document.getElementById('about_image');
+            const socialLinks = [
+                document.getElementById('facebook_url'),
+                document.getElementById('twitter_url'),
+                document.getElementById('instagram_url'),
+                document.getElementById('linkedin_url'),
+                document.getElementById('youtube_url')
+            ];
+
+            const validUrlRegex = /^(https?:\/\/)?([\w\d\-]+\.)+\w{2,}(\/.*)?$/;
+
+            form.addEventListener('submit', function(e) {
+                let hasErrors = false;
+                let errorMessages = [];
+
+                // Check required fields
+                if (!title.value.trim()) {
+                    hasErrors = true;
+                    errorMessages.push("Title is required.");
+                }
+
+                if (!description.value.trim()) {
+                    hasErrors = true;
+                    errorMessages.push("Description is required.");
+                }
+
+                if (!image.value && !document.querySelector('.curr-image img')) {
+                    hasErrors = true;
+                    errorMessages.push("An image must be uploaded.");
+                }
+
+                // Validate social media links
+                socialLinks.forEach(link => {
+                    if (link.value.trim() && !validUrlRegex.test(link.value.trim())) {
+                        hasErrors = true;
+                        errorMessages.push(
+                            `${link.name.replace('_url', '').toUpperCase()} URL is invalid.`);
+                    }
+                });
+
+                // Prevent form submission if there are errors
+                if (hasErrors) {
+                    e.preventDefault();
+                    alert("Please fix the following errors:\n\n" + errorMessages.join("\n"));
+                }
+            });
+        });
+    </script>
+
 @endsection
