@@ -264,4 +264,109 @@
             }
         }
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('achievementForm');
+
+            form.addEventListener('submit', function(e) {
+                // Clear any previous errors
+                const errorModal = document.getElementById('errorModal');
+                const errorList = errorModal.querySelector('.modal-body ul');
+                errorList.innerHTML = '';
+
+                let isValid = true;
+                const errors = [];
+
+                // Title Validation
+                const title = document.getElementById('achievement_title').value.trim();
+                if (!title) {
+                    isValid = false;
+                    errors.push('Title is required.');
+                }
+
+                // Push Notification Validation
+                const pushTitle = document.getElementById('achievement_push_title').value.trim();
+                if (!pushTitle) {
+                    isValid = false;
+                    errors.push('Push Notification Title is required.');
+                }
+
+                // How to Get There Validation
+                const howToGetThere = document.getElementById('achievement_how_to_get_here').value.trim();
+                if (!howToGetThere) {
+                    isValid = false;
+                    errors.push('How to Get There is required.');
+                }
+
+                // Description Validation
+                const description = document.getElementById('achievement_description').value.trim();
+                if (!description) {
+                    isValid = false;
+                    errors.push('Description is required.');
+                }
+
+                // Latitude and Longitude Validation
+                const lat = document.getElementById('achievement_lat').value;
+                const long = document.getElementById('achievement_long').value;
+                if (isNaN(lat)) {
+                    isValid = false;
+                    errors.push('Latitude must be a number between -90 and 90.');
+                }
+                if (isNaN(long)) {
+                    isValid = false;
+                    errors.push('Longitude must be a number between -180 and 180.');
+                }
+
+                // Radius Validation
+                const radius = document.getElementById('radius').value;
+                if (isNaN(radius) || radius <= 0) {
+                    isValid = false;
+                    errors.push('Radius must be a positive number.');
+                }
+
+                // File Validation (Color Image and B&W Image)
+                const colorImage = document.getElementById('achievement_image_color').files[0];
+                const bwImage = document.getElementById('achievement_image_bw').files[0];
+                const allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+
+                if (!colorImage || !allowedFileTypes.includes(colorImage.type)) {
+                    isValid = false;
+                    errors.push('A valid Color Image is required. Allowed formats: PNG, JPG, JPEG, WEBP.');
+                }
+
+                if (!bwImage || !allowedFileTypes.includes(bwImage.type)) {
+                    isValid = false;
+                    errors.push('A valid B&W Image is required. Allowed formats: PNG, JPG, JPEG, WEBP.');
+                }
+
+                // If there are errors, prevent form submission and display the errors
+                if (!isValid) {
+                    e.preventDefault();
+                    errors.forEach(error => {
+                        const li = document.createElement('li');
+                        li.textContent = error;
+                        errorList.appendChild(li);
+                    });
+                    const bootstrapModal = new bootstrap.Modal(errorModal);
+                    bootstrapModal.show();
+                }
+            });
+
+            // Drag and drop file handlers
+            window.handleDragOver = function(e) {
+                e.preventDefault();
+            };
+
+            window.handleFileDrop = function(e, inputId) {
+                e.preventDefault();
+                const fileInput = document.getElementById(inputId);
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                }
+            };
+        });
+    </script>
+
 @endsection
