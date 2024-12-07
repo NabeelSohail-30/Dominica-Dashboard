@@ -125,14 +125,14 @@
             <!-- Latitude -->
             <div class="form-group">
                 <label for="latitude">Latitude *</label>
-                <input type="number" name="latitude" id="latitude" value="{{ old('latitude') }}"
+                <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}"
                     placeholder="e.g. 34.0522" required>
             </div>
 
             <!-- Longitude -->
             <div class="form-group">
                 <label for="longitude">Longitude *</label>
-                <input type="number" name="longitude" id="longitude" value="{{ old('longitude') }}"
+                <input type="text" name="longitude" id="longitude" value="{{ old('longitude') }}"
                     placeholder="e.g. -118.2437" required>
             </div>
 

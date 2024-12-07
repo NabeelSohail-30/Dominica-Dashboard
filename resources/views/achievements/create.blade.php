@@ -45,12 +45,12 @@
 
                 <div class="form-group">
                     <label for="achievement_lat">Latitude</label>
-                    <input type="number" name="achievement_lat" id="achievement_lat" value="0.0">
+                    <input type="text" name="achievement_lat" id="achievement_lat" value="0.0">
                 </div>
 
                 <div class="form-group">
                     <label for="achievement_long">Longitude</label>
-                    <input type="number" name="achievement_long" id="achievement_long" value="0.0">
+                    <input type="text" name="achievement_long" id="achievement_long" value="0.0">
                 </div>
 
                 <div class="form-group">

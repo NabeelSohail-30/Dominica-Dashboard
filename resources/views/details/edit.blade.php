@@ -131,13 +131,13 @@
                 <!-- Location Details -->
                 <div class="form-group">
                     <label for="latitude">Latitude *</label>
-                    <input type="number" name="latitude" id="latitude" placeholder="e.g. 37.7749" required
+                    <input type="text" name="latitude" id="latitude" placeholder="e.g. 37.7749" required
                         value="{{ $details->latitude }}">
                 </div>
 
                 <div class="form-group">
                     <label for="longitude">Longitude *</label>
-                    <input type="number" name="longitude" id="longitude" placeholder="e.g. -122.4194" required
+                    <input type="text" name="longitude" id="longitude" placeholder="e.g. -122.4194" required
                         value="{{ $details->longitude }}">
                 </div>
 
