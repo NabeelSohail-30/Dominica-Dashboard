@@ -48,7 +48,6 @@
         <div id="table-container">
             @include('partials.hike_table', ['registrations' => $registrations])
         </div>
-
     </div>
 @endsection
 
@@ -117,7 +116,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function loadTable(page = 1, status = 'overdue') {
+        let currentStatus = 'overdue'; // Default status for the initial load
+
+        function loadTable(page = 1, status = currentStatus) {
             $.ajax({
                 url: "{{ route('hike.index') }}",
                 type: "GET",
@@ -126,7 +127,7 @@
                     sort: "{{ request('sort', 'first_name') }}",
                     order: "{{ request('order', 'asc') }}",
                     entriesPerPage: $('#entriesPerPage').val(),
-                    status: status, // Pass the status to the server
+                    status: status, // Use the selected status
                     page: page // Include the page parameter for pagination
                 },
                 success: function(response) {
@@ -138,23 +139,21 @@
         $('.tab a').on('click', function() {
             $('.tab').removeClass('active'); // Adjusted to target the parent `.tab`
             $(this).parent().addClass('active'); // Add active class to the clicked tab
-            const status = $(this).data('status');
-            loadTable(1, status);
+            currentStatus = $(this).data('status'); // Update the current status
+            loadTable(1, currentStatus); // Load the table for the selected tab
         });
 
-
-        // Trigger initial load with 'ongoing' status
         $(document).ready(function() {
-            loadTable();
+            loadTable(); // Initial load
         });
 
-        // Event listeners for search, pagination, and sorting
+        // Event listeners for search, entries per page, and sorting
         $('#search').on('keyup', function() {
-            loadTable();
+            loadTable(); // Use the current status
         });
 
         $('#entriesPerPage').on('change', function() {
-            loadTable();
+            loadTable(); // Use the current status
         });
 
         $(document).on('click', '.sortable', function(e) {
@@ -167,7 +166,8 @@
                     search: $('#search').val(),
                     sort: sort,
                     order: order,
-                    entriesPerPage: $('#entriesPerPage').val()
+                    entriesPerPage: $('#entriesPerPage').val(),
+                    status: currentStatus // Include the current status
                 },
                 success: function(response) {
                     $('#table-container').html(response);
@@ -179,8 +179,7 @@
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
             let page = $(this).attr('href').split('page=')[1];
-            loadTable(page); // Call loadTable with the page number
+            loadTable(page, currentStatus); // Use the current status and page number
         });
     </script>
-
 @endsection

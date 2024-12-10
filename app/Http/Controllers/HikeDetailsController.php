@@ -12,22 +12,24 @@ class HikeDetailsController extends Controller
         $query = HikeDetails::query();
 
         // Filter based on status
-        if ($request->has('status')) {
-            $status = $request->status;
-
-            if ($status === 'ongoing') {
-                $query->where('is_active', 1)
-                    ->where('expected_completion_datetime', '>=', now());
-            } elseif ($status === 'overdue') {
-                $query->where('is_active', 1)
-                    ->where('expected_completion_datetime', '<', now());
-            } elseif ($status === 'completed') {
-                $query->where('is_active', 0);
+        if ($request->filled('status')) {
+            switch ($request->status) {
+                case 'ongoing':
+                    $query->where('is_active', 1)
+                        ->where('expected_completion_datetime', '>=', now());
+                    break;
+                case 'overdue':
+                    $query->where('is_active', 1)
+                        ->where('expected_completion_datetime', '<', now());
+                    break;
+                case 'completed':
+                    $query->where('is_active', 0);
+                    break;
             }
         }
 
         // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('first_name', 'like', '%' . $request->search . '%')
                     ->orWhere('last_name', 'like', '%' . $request->search . '%')
@@ -37,16 +39,16 @@ class HikeDetailsController extends Controller
             });
         }
 
-        // Sorting functionality
-        $sort = $request->input('sort', 'first_name'); // Default sort by first_name
-        $order = $request->input('order', 'asc'); // Default order is ascending
+        // Sorting
+        $sort = $request->input('sort', 'first_name'); // Default sort
+        $order = $request->input('order', 'asc'); // Default order
         $query->orderBy($sort, $order);
 
-        // Pagination size
-        $perPage = $request->input('entriesPerPage', 10); // Default to 10 entries per page
+        // Pagination
+        $perPage = $request->input('entriesPerPage', 10);
         $registrations = $query->paginate($perPage);
 
-        // AJAX response
+        // Return AJAX or standard view
         if ($request->ajax()) {
             return view('partials.hike_table', compact('registrations'))->render();
         }
